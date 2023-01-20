@@ -24,6 +24,6 @@ cd /scratch/users/alyulina/novogene_01.09.2023_X202SC22123847-Z01-F001/01.RawDat
 for i in *.fq.gz; do gzip -cd "$i" > "${i%.*}"; done
 
 # using pear to pair reads w/ -j 16 threads (same as ntasks) and -b 30 phred scores of at least q30
-/home/groups/dpetrov/SOFTWARE/pear_0.9.11/bin/pear -f *_1.fq -r *_2.fq -o "${sample}_merged -j 16 -b 30
+/home/groups/dpetrov/SOFTWARE/pear_0.9.11/bin/pear -f *_1.fq -r *_2.fq -o "${sample}_merged" -j 16 -b 30
 
 # this should produce four output files; we will need sample_merged.assembled.fastq
