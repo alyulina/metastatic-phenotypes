@@ -59,7 +59,7 @@ for i in range(len(lines)):
                 # clID: 'bc,n\n'
                 clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i // 4 + 1)))
 
-print('Fraction of mapped reads: ' + str(len(n) / (len(lines) // 4)))  # how many reads had a barcode match
+print('Fraction of mapped reads: ' + str(n / (len(lines) // 4)))  # how many reads had a barcode match
 
 for i in clIDs:
     if len(clID_bc_dict[i]) == 0:
