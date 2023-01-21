@@ -15,7 +15,7 @@
 echo $SLURM_ARRAY_TASK_ID
 
 # read sample id
-sample=$(head -$SLURM_ARRAY_TASK_ID input_samples.txt | tail -1)
+sample=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 
 # go to where the data is
 cd /scratch/users/alyulina/novogene_01.09.2023_X202SC22123847-Z01-F001/01.RawData/"$sample"/
