@@ -30,38 +30,48 @@ clIDs = ['AACC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT',
          'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GATC', 'GCAT', 'GCTA', 'GGAA', 'GGTT',
          'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TGCT', 'TGTG', 'TTCC', 'TTGG']
 
-with open(sample_path + sample + '_merged.assembled.fastq', 'r') as f:
-    lines = f.readlines()
-
+merged_reads = open(sample_path + sample + '_merged.assembled.fastq', 'r')
 clID_bc_out = open(sample_path + sample + '_clID_bc_extracted.txt', 'w+')
 
 # dict. w/ clIDs as keys and bartender input as values
 clID_bc_dict = dict(zip(clIDs, [[] for i in range(len(clIDs))]))
 
+i = 0
 n = 0
-for i in range(len(lines)):
-    if i % 4 == 0:  # for each merged read
 
-        if regex.search(lines[i + 1]):  # if the pattern can be matched
-            match = regex.search(lines[i + 1])  # regular expression search match
-            clID = match.group(1)  # cell line ID
-            bc = match.group(2)  # barcode
-            start, end = match.span(2)
-            avg_q = avg_qscore(lines[i + 3][start: end])  # avg. q-score
+while True:
 
-            # if avg. q-score is at least 30 and cell line ID matches one of those in the list
-            if set(bc).issubset({'A', 'T', 'G', 'C', 'N'}) == True and avg_q >= 30 and clID in clIDs:
-                n += 1
+    # reading one .fastq entry at a time
+    line_0 = merged_reads.readline()
+    if not line_0:
+        break
 
-                # .fastq entry number, cell line ID, barcode, avg. q-score, and first .fastq entry line
-                clID_bc_out.write('\t'.join([str(i // 4 + 1), clID, bc, str(avg_q), lines[i].strip('\n')]) + '\n')
+    line_1 = merged_reads.readline()
+    line_2 = merged_reads.readline()
+    line_3 = merged_reads.readline()
 
-                # clID: 'bc,n\n'
-                clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i // 4 + 1)))
-                
+    if regex.search(line_1):  # if the pattern can be matched
+        match = regex.search(line_1)  # regular expression search match
+        clID = match.group(1)  # cell line ID
+        bc = match.group(2)  # barcode
+        start, end = match.span(2)
+        avg_q = avg_qscore(line_3[start: end])  # avg. q-score
+
+        # if avg. q-score is at least 30 and cell line ID matches one of those in the list
+        if set(bc).issubset({'A', 'T', 'G', 'C', 'N'}) == True and avg_q >= 30 and clID in clIDs:
+            n += 1
+
+            # .fastq entry number, cell line ID, barcode, avg. q-score, and first .fastq entry line
+            clID_bc_out.write('\t'.join([str(i + 1), clID, bc, str(avg_q), line_0.strip('\n')]) + '\n')
+
+            # clID: 'bc,n\n'
+            clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i + 1)))
+    i += 1
+
+merged_reads.close()
 clID_bc_out.close()
 
-print('Fraction of mapped reads: ' + str(n / (len(lines) // 4)))  # how many reads had a barcode match
+print('Fraction of mapped reads: ' + str(n / i)  # how many reads had a barcode match
 
 for i in clIDs:
     if len(clID_bc_dict[i]) == 0:
