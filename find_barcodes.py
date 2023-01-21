@@ -38,6 +38,7 @@ clID_bc_out = open(sample_path + sample + '_clID_bc_extracted.txt', 'w+')
 # dict. w/ clIDs as keys and bartender input as values
 clID_bc_dict = dict(zip(clIDs, [[] for i in range(len(clIDs))]))
 
+n = 0
 for i in range(len(lines)):
     if i % 4 == 0:  # for each merged read
 
@@ -50,13 +51,15 @@ for i in range(len(lines)):
 
             # if avg. q-score is at least 30 and cell line ID matches one of those in the list
             if set(bc).issubset({'A', 'T', 'G', 'C', 'N'}) == True and avg_q >= 30 and clID in clIDs:
+                n += 1
+
                 # .fastq entry number, cell line ID, barcode, avg. q-score, and first .fastq entry line
                 clID_bc_out.write('\t'.join([str(i // 4 + 1), clID, bc, str(avg_q), lines[i].strip('\n')]) + '\n')
 
                 # clID: 'bc,n\n'
                 clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i // 4 + 1)))
 
-print('Fraction of mapped reads: ' + str(len(found) / (len(lines) // 4)))  # how many reads had a barcode match
+print('Fraction of mapped reads: ' + str(len(n) / (len(lines) // 4)))  # how many reads had a barcode match
 
 for i in clIDs:
     if len(clID_bc_dict[i]) == 0:
