@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-#this is Jose's script
 #SBATCH --job-name=fastqc
 #SBATCH --output=fastqc.out
 #SBATCH --error=fastqc.err
