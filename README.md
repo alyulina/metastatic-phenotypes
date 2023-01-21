@@ -1,5 +1,5 @@
 **Pairing paired-end reads:**  
-run `0_pair_reads.sh` to run pear (https://github.com/tseemann/PEAR). Requires a list of demultiplexed samples (`samples.txt`).
+run `0_pair_reads.sh` to run pear (https://github.com/tseemann/PEAR). Requires a list of demultiplexed samples (`samples.txt`). Check the output files to see how many reads were lost at this step.
 
 **Extracting barcodes and cell line IDs:**  
 run `1_find_barcodes.sh` to run `find_barcodes.py` to find and extract barcodes and cell line IDs;
