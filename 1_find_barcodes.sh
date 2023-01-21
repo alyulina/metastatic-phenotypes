@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=find_barcodes
-#SBATCH --output=/home/users/alyulina/pdac/bc_counts/novogene_01.09.2023_X202SC22123847-Z01-F001/slurm_find_barcodes_%A-%a.out
+#SBATCH --output=/home/users/alyulina/pdac/bc_counts/novogene_01.09.2023_X202SC22123847-Z01-F001/slurm/slurm_find_barcodes_%A-%a.out
 #SBATCH --partition hns,dpetrov,normal
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=8G
