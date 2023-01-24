@@ -54,9 +54,7 @@ for i in clIDs:
             else:
                 cluster_seq_count_i[consensus_seq] = int(count)
 
-    clID_bc_count.append([i + '_' + x[0] + '\t' + str(x[1]) + '\n' for x in cluster_seq_count_i.items()])
+    clID_bc_count.extend([i + '_' + x[0] + '\t' + str(x[1]) + '\n' for x in cluster_seq_count_i.items()])
 
 with open(sample_path + sample + '_merged_clIDs_bc_clusters_counts.txt', 'w+') as o:
     o.writelines(clID_bc_count)
-
-
