@@ -3,7 +3,7 @@
 #SBATCH --job-name=find_barcodes
 #SBATCH --output=/home/users/alyulina/pdac/bc_counts/novogene_01.09.2023_X202SC22123847-Z01-F001/slurm/slurm_cluster_barcodes_%A-%a.out
 #SBATCH --partition hns,dpetrov,normal
-#SBATCH --time=1-00:00:00
+#SBATCH --time=1:00:00
 #SBATCH --mem=8G
 #SBATCH --array=1-44
 #SBATCH --no-requeue
