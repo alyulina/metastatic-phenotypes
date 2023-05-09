@@ -13,14 +13,14 @@ parser.add_option("-s",
 parser.add_option("-p",
                   "--path",
                   type="string",
-                  help="path to raw reads (without the last backslash)",
+                  help="path to raw reads (with a backslash at the end)",
                   dest="path")
 
 (options, args) = parser.parse_args()
 sample = options.sample
 
 # path to the folder w/ raw data for this sample
-sample_path = path + '/' + sample + '/'
+sample_path = path + sample + '/'
 
 def avg_qscore(x):
     return np.mean([ord(i) - 33 for i in x])
