@@ -31,4 +31,4 @@ for i in *.fq.gz; do gzip -cd "$i" > "${i%.*}"; done
 # rename unzipped .fq files
 for i in *.fq; do mv $i $(echo $i | awk '{split($1,a,/_/); print a[1]"_"a[2]"_R"a[6]}'); done
 
-srun --cpu_bind=verbose python3 find_barcodes.py -s $(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1) -p /scratch/users/alyulina/novogene_04.26.2023_X202SC23040899-Z01-F001/01.RawData/
+srun --cpu_bind=verbose python3 /home/users/alyulina/pdac/find_barcodes.py -s $(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1) -p /scratch/users/alyulina/novogene_04.26.2023_X202SC23040899-Z01-F001/01.RawData/
