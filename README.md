@@ -8,4 +8,4 @@ and one file per cell line with just the barcodes within that cell line, which w
 `pip3 install --user regex`.
 
 **Clustering and counting barcodes:**  
-
+see `cluster_barcodes.py` and `2_cluster_barcodes.sh`; also see the `clustering-testing` branch. 
