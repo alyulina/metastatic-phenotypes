@@ -10,68 +10,157 @@ parser.add_option("-s",
                   help="sample ID as in samples.txt",
                   dest="sample")
 
+parser.add_option("-p",
+                  "--path",
+                  type="string",
+                  help="path to raw reads (without the last backslash)",
+                  dest="path")
+
 (options, args) = parser.parse_args()
 sample = options.sample
 
 # path to the folder w/ raw data for this sample
-sample_path = '/scratch/users/alyulina/novogene_01.09.2023_X202SC22123847-Z01-F001/01.RawData/' + sample + '/'
+sample_path = path + '/' + sample + '/'
 
 def avg_qscore(x):
     return np.mean([ord(i) - 33 for i in x])
 
-# regular expression pattern for the barcode region:
-# regex = re.compile('TT' + '(clID)' + '(barcode)' + '(GAAAC){e<2}'), 
-# allowing at most one error in the subsequent region and no errors in the preceeding region 
-regex = re.compile('TT' + '(....)' + '(...G...G...G...G)' + '(GAAAC){e<2}')
+# regular expression pattern for the barcode region: 
+# regex_fw = re.compile('TT' + '(clID)' + '(barcode)' + '(GAAAC){e<2}'), 
+# regex_rv is the reverse complement
+# allowing at most one error in the subsequent region and no errors in the preceeding region + no Ns in the barcode or clID
+regex_fw = re.compile('TT' + '([ATGC]{4})' + '([ATGC]{3}G[ATGC]{3}G[ATGC]{3}G[ATGC]{3}G)' + '(GAAAC){e<2}')
+regex_rv = re.compile('(GTTTC){e<2}' + '(C[ATGC]{3}C[ATGC]{3}C[ATGC]{3}C[ATGC]{3})' + '([ATGC]{4})' + 'AA')
 
 # cell line IDs; 
 # minumum Hamming distance between any two of them is 2
+# keeping TGCT but the cell line is not there
 clIDs = ['AACC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT',
          'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GATC', 'GCAT', 'GCTA', 'GGAA', 'GGTT',
          'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TGCT', 'TGTG', 'TTCC', 'TTGG']
 
-merged_reads = open(sample_path + sample + '_merged.assembled.fastq', 'r')
+# input files w/ raw reads
+reads_r1 = open(sample_path + sample + '_R1.fq', 'r')
+reads_r2 = open(sample_path + sample + '_R2.fq', 'r')
+
+# output files
 clID_bc_out = open(sample_path + sample + '_clID_bc_extracted.txt', 'w+')
+failed_clIDs_out = open(sample_path + sample + '_failed_clIDs.txt', 'w+')
 
 # dict. w/ clIDs as keys and bartender input as values
 clID_bc_dict = dict(zip(clIDs, [[] for i in range(len(clIDs))]))
 
-i = 0
-n = 0
+i = 0 # counting reads
+m = 0 # counting reads that had a regex match and hig enough q-score but did not pair well
+o = 0 # counting reads that passed qc but did not have a clID match
+n = 0 # counting reads that passed qc and had a clID match
 
 while True:
-
-    # reading one .fastq entry at a time
-    line_0 = merged_reads.readline()
-    if not line_0:
+    
+    # reading one .fq entry at a time
+    # r1 reads:
+    line_0_r1 = reads_r1.readline() 
+    if not line_0_r1: # stopping if no more reads
         break
+        
+    line_1_r1 = reads_r1.readline() # has the sequence
+    line_2_r1 = reads_r1.readline()
+    line_3_r1 = reads_r1.readline() # has the q-score
+    
+    # r2 reads:
+    line_0_r2 = reads_r2.readline() 
+    if not line_0_r2: 
+        break
+        
+    line_1_r2 = reads_r2.readline() 
+    line_2_r2 = reads_r2.readline()
+    line_3_r2 = reads_r2.readline() 
 
-    line_1 = merged_reads.readline()
-    line_2 = merged_reads.readline()
-    line_3 = merged_reads.readline()
+    # assuming that r1 read is forward
+    if regex_fw.search(line_1_r1) and regex_rv.search(line_1_r2): # if the pattern can be matched in both reads
+        match_fw = regex_fw.search(line_1_r1) # regular expression search match
+        match_rv = regex_rv.search(line_1_r2)
+        
+        start_r1, end_r1 = match_fw.span(2) 
+        avg_q_r1 = avg_qscore(line_3_r1[start_r1 : end_r1]) # avg. q-score in forward read
+        
+        start_r2, end_r2 = match_rv.span(2) 
+        avg_q_r2 = avg_qscore(line_3_r2[start_r2 : end_r2]) # avg. q-score in reverse read
+        
+        # if avg. q-score is at least 30 
+        if avg_q_r1 >= 30 and avg_q_r2 >= 30:
+        
+            # if clID and barcode match between reads
+            if match_fw.group(1) + match_fw.group(2) == rv_cmp(match_rv.group(2) + match_rv.group(3)):
+        
+                clID = match_fw.group(1) # cell line ID        
+                bc = match_fw.group(2) # barcode
+                            
+                # and cell line ID matches one of those in the list
+                if clID in clIDs:
+                    n += 1
+                
+                    # .fastq entry number, cell line ID, barcode
+                    clID_bc_out.write('\t'.join([str(i + 1), clID, bc]) + '\n') 
+                
+                    # clID: 'bc,n\n'
+                    clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i + 1)))
 
-    if regex.search(line_1):  # if the pattern can be matched
-        match = regex.search(line_1)  # regular expression search match
-        clID = match.group(1)  # cell line ID
-        bc = match.group(2)  # barcode
-        start, end = match.span(2)
-        avg_q = avg_qscore(line_3[start: end])  # avg. q-score
+                else:
+                    o += 1
+                    
+                    # .fastq entry number, cell line ID, barcode
+                    failed_clIDs_out.write('\t'.join([str(i // 4 + 1), clID, bc]) + '\n')
+            
+            else:
+                m += 1
+                
+                
+    # assuming that r2 read is forward        
+    elif regex_fw.search(line_1_r2) and regex_rv.search(line_1_r1):
+        match_fw = regex_fw.search(line_1_r2)
+        match_rv = regex_rv.search(line_1_r1)
+        
+        start_r2, end_r2 = match_fw.span(2) 
+        avg_q_r2 = avg_qscore(line_3_r2[start_r2 : end_r2]) 
+        
+        start_r1, end_r1 = match_rv.span(2) 
+        avg_q_r1 = avg_qscore(line_3_r1[start_r1 : end_r1])
+        
+        if avg_q_r2 >= 30 and avg_q_r1 >= 30:
+        
+            if match_fw.group(1) + match_fw.group(2) == rv_cmp(match_rv.group(2) + match_rv.group(3)):
+        
+                clID = match_fw.group(1) 
+                bc = match_fw.group(2)
+                            
+                if clID in clIDs:
+                    n += 1
+                    clID_bc_out.write('\t'.join([str(i + 1), clID, bc]) + '\n') 
+                    clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i + 1)))
 
-        # if avg. q-score is at least 30 and cell line ID matches one of those in the list
-        if set(bc).issubset({'A', 'T', 'G', 'C', 'N'}) == True and avg_q >= 30 and clID in clIDs:
-            n += 1
-
-            # .fastq entry number, cell line ID, barcode, avg. q-score, and first .fastq entry line
-            clID_bc_out.write('\t'.join([str(i + 1), clID, bc, str(avg_q), line_0.strip('\n')]) + '\n')
-
-            # clID: 'bc,n\n'
-            clID_bc_dict[clID].append('{},{}\n'.format(bc, str(i + 1)))
+                else:
+                    o += 1
+                    failed_clIDs_out.write('\t'.join([str(i // 4 + 1), clID, bc]) + '\n')
+                                
+            else:
+                m += 1
+ 
     i += 1
 
-merged_reads.close()
+reads_r1.close()
+reads_r2.close()
 clID_bc_out.close()
+failed_clIDs_out.close()
 
-print('Fraction of mapped reads: ' + str(n / i)  # how many reads had a barcode match
+# writing stats out
+stats_out = open(sample_path + sample + '_find_barcodes_stats.txt', 'w+')
+stats_out.write('Total reads: ' + str(i) + '\n')
+stats_out.write('Had a regex match and a high q-score but did not pair well: ' + str(o) + '\n')
+stats_out.write('Passed qc but no clID match: ' + str(m) + '\n')
+stats_out.write('Passed qc and had a known clID: ' + str(n) + '\n')
+stats_out.close()
+
 
 for i in clIDs:
     if len(clID_bc_dict[i]) == 0:
