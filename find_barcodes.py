@@ -18,12 +18,17 @@ parser.add_option("-p",
 
 (options, args) = parser.parse_args()
 sample = options.sample
+path = options.path
 
 # path to the folder w/ raw data for this sample
 sample_path = path + sample + '/'
 
 def avg_qscore(x):
     return np.mean([ord(i) - 33 for i in x])
+
+def rv_cmp(strand):
+    complement = {'A':'T', 'T':'A', 'G':'C', 'C':'G', 'N':'N'}
+    return ''.join(complement[base] for base in strand[::-1])
 
 # regular expression pattern for the barcode region: 
 # regex_fw = re.compile('TT' + '(clID)' + '(barcode)' + '(GAAAC){e<2}'), 
