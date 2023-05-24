@@ -41,7 +41,6 @@ for i in *.fq; do cp $i $(echo $i | awk '{split($1,a,/_/); print a[1]"_"a[2]"_R"
 cd "$dir"
 
 srun --cpu_bind=verbose find_barcodes.py -s "$sample" -p "${data}"/
-wait
 
 cp "${data}"/"$sample"/*_clID_bc_extracted.txt ./out
 cp "${data}"/"$sample"/*_failed_clIDs.txt ./out
