@@ -1,5 +1,5 @@
 **Not pairing paired-end reads:**  
-reads will be paired only in both the barcode and the clID in both reads match; this is now done in `find_barcodes.py`. When running on the cluster, change the data directory in the `1_find_barcodes.sh` script. Requires a list of samples called `samples.txt, a folder for slurm output called `slurm`, and a folder for output called `out`.
+reads will be paired only in both the barcode and the clID in both reads match; this is now done in `find_barcodes.py`. When running on the cluster, change the data directory in the `1_find_barcodes.sh` script. Requires a list of samples called `samples.txt, a folder for slurm output called `slurm`, and a folder for output called `out`. Only works for certain kinds of names (for renaming in `1_find_barcodes.sh` to work).
 
 Running this should produce four kinds of output files:  
     (i) `sample_find_barcodes_stats.txt` w/ stats on the number of reads that were processed and filtered out;  
