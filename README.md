@@ -1,5 +1,5 @@
 **Extracting barcodes and cell line IDs:**  
-run `1_find_barcodes.sh` to run `find_barcodes.py` to find and extract barcodes and cell line IDs. * *Only pairs reads if both the barcode and the clID in both reads match.* *  
+run `1_find_barcodes.sh` to run `find_barcodes.py` to find and extract barcodes and cell line IDs. *Only pairs reads if both the barcode and the clID in both reads match.*  
 
 When running on the cluster, change the data directory in the `1_find_barcodes.sh` script. Running this requires a list of demultiplexed samples (`samples.txt`), a folder for slurm output called `slurm`, and a folder for output called `out`. The `1_find_barcodes.sh` will first unzip the `.fq.gz` and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure that these steps work correctly! The renaming step only works for certain kinds of names so check the slurm output files to make sure that that step worked. If running for the first time, install regex first w/ 
 `pip3 install --user regex`.  
