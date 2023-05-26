@@ -7,7 +7,7 @@ When running on the cluster, change the data directory in the `1_find_barcodes.s
 Running this should produce four kinds of output files:  
     (i) `sample_find_barcodes_stats.txt` w/ stats on the number of reads that were processed and filtered out;  
     (ii) `sample_failed_clIDs.txt` w/ output for reads that passed qc but had a mismatch in clID;  
-    (iii) `sample_clID_bc_extracted.txt` –- a file with clIDs and barcodes from all reads (`.fq entry number \t clID \t barcode \n`); 
+    (iii) `sample_clID_bc_extracted.txt` –- a file with clIDs and barcodes from all reads (`.fq entry number \t clID \t barcode \n`);  
     (iv) `sample_clID_bc_extracted.txt` -- same as above but split into separate files for each clID.  
     
 The first three files should be copied `scratch` to `home` by the `1_find_barcodes.sh` script but this does not always work so make sure to double-check. All of the output is in the data folder.  
