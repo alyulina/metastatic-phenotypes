@@ -1,193 +1,192 @@
-sample id,experiment,"time point, d",injection method,tissue,genotype,eartag (in vivo) / passage (in vitro),initial number of cells,"lung weight, g (in vivo) / cells (in vitro)",spike-in added,path to data (change if needed),notes
-SK1_64,in vitro,3,,,,1,2000000.0,11200000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_65,in vitro,3,,,,2,2000000.0,13900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_66,in vitro,3,,,,3,2000000.0,9750000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_67,in vitro,6,,,,1,2000000.0,21900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_68,in vitro,6,,,,2,2000000.0,21200000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_69,in vitro,6,,,,3,2000000.0,23600000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_70,in vitro,9,,,,1,2000000.0,22000000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_71,in vitro,9,,,,2,2000000.0,26700000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_72,in vitro,9,,,,3,2000000.0,26400000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_73,in vitro,12,,,,1,2000000.0,21900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_74,in vitro,12,,,,2,2000000.0,18600000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_75,in vitro,12,,,,3,2000000.0,22400000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_76,in vitro,15,,,,1,2000000.0,13800000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_77,in vitro,15,,,,2,2000000.0,15600000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_78,in vitro,15,,,,3,2000000.0,15100000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_79,in vitro,17,,,,1,2000000.0,23900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_80,in vitro,17,,,,2,2000000.0,22100000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_81,in vitro,17,,,,3,2000000.0,24900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_82,in vitro,20,,,,1,2000000.0,30400000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_83,in vitro,20,,,,2,2000000.0,25800000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_84,in vitro,20,,,,3,2000000.0,29400000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_85,in vitro,23,,,,1,2000000.0,26400000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_86,in vitro,23,,,,2,2000000.0,19900000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_87,in vitro,23,,,,3,2000000.0,20300000.0,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/in-vitro/,started from pre-injection samples used in experiment 1
-SK1_61,1,0,,,,1,2000000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/pre-inj/,none
-SK1_62,1,0,,,,2,2000000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/pre-inj/,none
-SK1_63,1,0,,,,3,2000000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/pre-inj/,none
-LA72_SK_10,2,0,,,,,2000000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/pre-inj/,none
-SK1_51,1,2,intravenous,lung,C57B6/129S F1,SK1855,2000000.0,0.2184,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_52,1,2,intravenous,lung,C57B6/129S F1,SK1856,2000000.0,0.2414,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_53,1,2,intravenous,lung,C57B6/129S F1,SK1857,2000000.0,0.2717,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_54,1,2,intravenous,lung,C57B6/129S F1,SK1858,2000000.0,0.224,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_55,1,2,intravenous,lung,C57B6/129S F1,SK1859,2000000.0,0.224,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_56,1,2,intravenous,lung,C57B6/129S F1,SK1860,2000000.0,0.2986,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_57,1,2,intravenous,lung,C57B6/129S F1,SK1861,2000000.0,0.3125,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-SK1_58,1,2,intravenous,lung,C57B6/129S F1,SK1862,2000000.0,0.3182,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_58:SK1_58_2 merged, one spike-in"
-SK1_58_2,1,2,intravenous,lung,C57B6/129S F1,SK1862,2000000.0,0.3182,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_58:SK1_58_2 merged, one spike-in"
-SK1_59,1,2,intravenous,lung,C57B6/129S F1,SK1863,2000000.0,0.3733,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_59:SK1_59_2 merged, one spike-in"
-SK1_59_2,1,2,intravenous,lung,C57B6/129S F1,SK1863,2000000.0,0.3733,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_59:SK1_59_2 merged, one spike-in"
-SK1_60,1,2,intravenous,lung,C57B6/129S F1,SK1864,2000000.0,0.3865,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_60:SK1_60_2 merged, one spike-in"
-SK1_60_2,1,2,intravenous,lung,C57B6/129S F1,SK1864,2000000.0,0.3865,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_60:SK1_60_2 merged, one spike-in"
-SK1_45,1,2,intravenous,lung,Rag1-/-,MT2284,2000000.0,0.091,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_45:SK1_46 merged, separate spike-ins"
-SK1_46,1,2,intravenous,lung,Rag1-/-,MT2284,2000000.0,0.1115,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_45:SK1_46 merged, separate spike-ins"
-SK1_47,1,2,intravenous,lung,Rag1-/-,CM3700,2000000.0,0.102,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_47:SK1_48 merged, separate spike-ins"
-SK1_48,1,2,intravenous,lung,Rag1-/-,CM3700,2000000.0,0.079,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_47:SK1_48 merged, separate spike-ins"
-SK1_49,1,2,intravenous,lung,Rag1-/-,CM3703,2000000.0,0.0954,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_49:SK1_50 merged, separate spike-ins"
-SK1_50,1,2,intravenous,lung,Rag1-/-,CM3703,2000000.0,0.07,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"SK1_49:SK1_50 merged, separate spike-ins"
-SK1_25,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000.0,0.428,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
-SK1_26,1,22,intravenous,lung,C57B6/129S F1,SK1866,200000.0,0.304,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_27,1,22,intravenous,lung,C57B6/129S F1,SK1867,200000.0,0.305,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_28,1,22,intravenous,lung,C57B6/129S F1,SK1868,200000.0,0.298,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_29,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000.0,0.292,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
-SK1_30,1,22,intravenous,lung,C57B6/129S F1,SK1870,200000.0,0.24,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_31,1,22,intravenous,lung,C57B6/129S F1,SK1871,200000.0,0.378,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_32,1,22,intravenous,lung,C57B6/129S F1,SK1872,200000.0,0.334,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_33,1,22,intravenous,lung,C57B6/129S F1,SK1873,200000.0,0.314,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_34,1,22,intravenous,lung,C57B6/129S F1,SK1874,200000.0,0.56,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_35,1,22,intravenous,lung,C57B6/129S F1,SK1875,200000.0,0.414,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_36,1,22,intravenous,lung,C57B6/129S F1,SK1876,200000.0,0.36,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_37,1,22,intravenous,lung,C57B6/129S F1,SK1877,200000.0,0.406,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_38,1,22,intravenous,lung,C57B6/129S F1,SK1878,200000.0,0.219,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_39,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000.0,0.434,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
-SK1_40,1,22,intravenous,lung,C57B6/129S F1,SK1880,200000.0,0.354,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_41,1,22,intravenous,lung,C57B6/129S F1,SK1881,200000.0,0.276,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_42,1,22,intravenous,lung,C57B6/129S F1,SK1882,200000.0,0.294,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_43,1,22,intravenous,lung,C57B6/129S F1,SK1883,200000.0,0.313,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_44,1,22,intravenous,lung,C57B6/129S F1,SK1884,200000.0,0.329,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_88,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000.0,0.428,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
-SK1_89,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000.0,0.428,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
-SK1_90,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000.0,0.434,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
-SK1_91,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000.0,0.434,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
-SK1_92,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000.0,0.292,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
-SK1_93,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000.0,0.292,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
-LA67_1,1,22,intravenous,pancreas,C57B6/129S F1,SK1865,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_2,1,22,intravenous,pancreas,C57B6/129S F1,SK1866,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_3,1,22,intravenous,pancreas,C57B6/129S F1,SK1867,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_4,1,22,intravenous,pancreas,C57B6/129S F1,SK1868,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_5,1,22,intravenous,pancreas,C57B6/129S F1,SK1869,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_6,1,22,intravenous,pancreas,C57B6/129S F1,SK1870,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_7,1,22,intravenous,pancreas,C57B6/129S F1,SK1871,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_8,1,22,intravenous,pancreas,C57B6/129S F1,SK1872,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_9,1,22,intravenous,pancreas,C57B6/129S F1,SK1873,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_10,1,22,intravenous,pancreas,C57B6/129S F1,SK1874,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_11,1,22,intravenous,pancreas,C57B6/129S F1,SK1875,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_12,1,22,intravenous,pancreas,C57B6/129S F1,SK1876,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_13,1,22,intravenous,pancreas,C57B6/129S F1,SK1877,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_14,1,22,intravenous,pancreas,C57B6/129S F1,SK1878,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_15,1,22,intravenous,pancreas,C57B6/129S F1,SK1879,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_16,1,22,intravenous,pancreas,C57B6/129S F1,SK1880,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_17,1,22,intravenous,pancreas,C57B6/129S F1,SK1881,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_18,1,22,intravenous,pancreas,C57B6/129S F1,SK1883,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LA67_19,1,22,intravenous,pancreas,C57B6/129S F1,SK1884,200000.0,,False,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_1,1,21,intravenous,lung,Rag1-/-,CM3633,200000.0,0.22,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_2,1,21,intravenous,lung,Rag1-/-,SL44,200000.0,0.1842,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_3,1,21,intravenous,lung,Rag1-/-,SL50,200000.0,0.182,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_4,1,21,intravenous,lung,Rag1-/-,SL048,200000.0,0.461,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_5,1,21,intravenous,lung,Rag1-/-,SL047,200000.0,0.256,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_6,1,21,intravenous,lung,Rag1-/-,SL177,200000.0,0.287,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_7,1,21,intravenous,lung,Rag1-/-,SL179,200000.0,0.437,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_9,1,21,intravenous,lung,Rag1-/-,CM3635,200000.0,0.181,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_10,1,21,intravenous,lung,Rag1-/-,CM3638,200000.0,0.222,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_12,1,21,intravenous,lung,Rag1-/-,CM3681,200000.0,0.213,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_13,1,21,intravenous,lung,Rag1-/-,SL046,200000.0,0.166,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_14,1,21,intravenous,lung,Rag1-/-,SL051,200000.0,0.213,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_15,1,21,intravenous,lung,Rag1-/-,CM3705,200000.0,0.232,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_16,1,21,intravenous,lung,Rag1-/-,MT2362,200000.0,0.205,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_17,1,21,intravenous,lung,Rag1-/-,MT2359,200000.0,0.189,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_18,1,21,intravenous,lung,Rag1-/-,SL101,200000.0,0.162,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_19,1,21,intravenous,lung,Rag1-/-,SL103,200000.0,0.17,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_20,1,21,intravenous,lung,Rag1-/-,SL176,200000.0,0.171,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_21,1,21,intravenous,lung,Rag1-/-,SL178,200000.0,0.285,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_22,1,21,intravenous,lung,Rag1-/-,SL180,200000.0,0.158,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_23,1,21,intravenous,lung,Rag1-/-,SL175,200000.0,0.215,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_24,1,21,intravenous,lung,Rag1-/-,CM3725,200000.0,0.27,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-SK1_111,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK111_2:SK1_111 merged, one spike-in"
-SK111_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK111_2:SK1_111 merged, one spike-in"
-SK1_112,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK112_2:SK1_112 merged, one spike-in"
-SK112_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK112_2:SK1_112 merged, one spike-in"
-SK113,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1889,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK1_114,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK114_2:SK1_114 merged, one spike-in"
-SK114_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK114_2:SK1_114 merged, one spike-in"
-SK115,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1891,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK116,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1892,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK1_94,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_94:SK94_2 merged, one spike-in"
-SK94_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_94:SK94_2 merged, one spike-in"
-SK1_95,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_95:SK95_2 merged, one spike-in"
-SK95_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_95:SK95_2 merged, one spike-in"
-SK96,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1887,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK97,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1888,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK98,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1889,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK1_99,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_99:SK99_2 merged, one spike-in"
-SK99_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK1_99:SK99_2 merged, one spike-in"
-SK100,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1891,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK101,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1892,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK102,1,21,intraperitoneal,pancreas,C57B6/129S F1,SK1893,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK1_103,1,22,intraperitoneal,liver,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK103_2:SK1_103 merged, one spike-in"
-SK103_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1885,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK103_2:SK1_103 merged, one spike-in"
-SK1_104,1,22,intraperitoneal,liver,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK104_2:SK1_104 merged, one spike-in"
-SK104_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1886,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK104_2:SK1_104 merged, one spike-in"
-SK105,1,22,intraperitoneal,liver,C57B6/129S F1,SK1888,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK106,1,22,intraperitoneal,liver,C57B6/129S F1,SK1889,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK1_107,1,22,intraperitoneal,liver,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK107_2:SK1_107 merged, one spike-in"
-SK107_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1890,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,"SK107_2:SK1_107 merged, one spike-in"
-SK108,1,22,intraperitoneal,liver,C57B6/129S F1,SK1891,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK109,1,22,intraperitoneal,liver,C57B6/129S F1,SK1892,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-SK110,1,21,intraperitoneal,liver,C57B6/129S F1,SK1893,2000000.0,,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_01A,2,2,intravenous,lung,C57B6/129S F1,SK2.1.1,2000000.0,0.238,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"LS01_01A:LS01_01B merged, one spike-in"
-LS01_01B,2,2,intravenous,lung,C57B6/129S F1,SK2.1.1,2000000.0,0.238,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"LS01_01A:LS01_01B merged, one spike-in"
-LS01_02A,2,2,intravenous,lung,C57B6/129S F1,SK2.1.2,2000000.0,0.304,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"LS01_02A:LS01_02B merged, one spike-in"
-LS01_02B,2,2,intravenous,lung,C57B6/129S F1,SK2.1.2,2000000.0,0.304,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,"LS01_02A:LS01_02B merged, one spike-in"
-LS01_03,2,2,intravenous,lung,C57B6/129S F1,SK2.1.3,1500000.0,0.234,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-LS01_04,2,2,intravenous,lung,C57B6/129S F1,SK2.1.4,1500000.0,0.231,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-LS01_05,2,2,intravenous,lung,C57B6/129S F1,SK2.1.5,1500000.0,0.3716,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-LS01_06,2,2,intravenous,lung,C57B6/129S F1,SK2.1.6,1500000.0,0.2188,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-LS01_07,2,2,intravenous,lung,C57B6/129S F1,SK2.1.7,1500000.0,0.191,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/2-day/,none
-LS01_35,2,21,intravenous,lung,C57B6/129S F1,SK2.4.9,200000.0,1.044,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_36,2,21,intravenous,lung,C57B6/129S F1,SK2.4.10,200000.0,0.635,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_37,2,21,intravenous,lung,C57B6/129S F1,SK2.4.11,200000.0,0.439,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_38,2,21,intravenous,lung,C57B6/129S F1,SK2.4.12,200000.0,0.475,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_39,2,21,intravenous,lung,C57B6/129S F1,SK2.4.13,200000.0,0.522,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_40,2,21,intravenous,lung,C57B6/129S F1,SK2.4.14,200000.0,0.667,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_41,2,21,intravenous,lung,C57B6/129S F1,SK2.4.15,200000.0,0.39,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_42,2,21,intravenous,lung,C57B6/129S F1,SK2.4.16,200000.0,0.409,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_43A,2,21,intravenous,lung,C57B6/129S F1,SK2.4.17,200000.0,0.66,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"LS01_43A:LS01_43B merged, one spike-in"
-LS01_43B,2,21,intravenous,lung,C57B6/129S F1,SK2.4.17,200000.0,0.66,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"LS01_43A:LS01_43B merged, one spike-in"
-LS01_44A,2,21,intravenous,lung,C57B6/129S F1,SK2.4.18,200000.0,0.429,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"LS01_44A:LS01_44B merged, one spike-in"
-LS01_44B,2,21,intravenous,lung,C57B6/129S F1,SK2.4.18,200000.0,0.429,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,"LS01_44A:LS01_44B merged, one spike-in"
-LS01_27,2,21,intravenous,lung,Rag1-/-,SK2.4.1,200000.0,0.635,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_28,2,21,intravenous,lung,Rag1-/-,SK2.4.2,200000.0,0.507,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_29,2,21,intravenous,lung,Rag1-/-,SK2.4.3,200000.0,0.486,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_30,2,21,intravenous,lung,Rag1-/-,SK2.4.4,200000.0,0.527,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_31,2,21,intravenous,lung,Rag1-/-,SK2.4.5,200000.0,0.427,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_33,2,21,intravenous,lung,Rag1-/-,SK2.4.7,200000.0,0.778,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_34,2,21,intravenous,lung,Rag1-/-,SK2.4.8,200000.0,0.265,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/3-week/,none
-LS01_17,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.1,1000000.0,1.305,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_18,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.2,1000000.0,0.869,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_19,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.3,1000000.0,1.836,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_20,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.4,1000000.0,0.6322,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_21,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.5,1000000.0,1.335,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_22,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.6,1000000.0,1.239,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_24,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.8,1000000.0,1.015,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_25,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.9,1000000.0,0.787,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_26,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.10,1000000.0,1.196,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_08,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.1,1000000.0,3.928,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_09,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.2,1000000.0,3.189,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_10,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.3,1000000.0,4.2,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_11,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.4,1000000.0,4.257,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_12,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.5,1000000.0,4.0018,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_13,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.6,1000000.0,3.467,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_14,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.7,1000000.0,4.385,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_15,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.8,1000000.0,5.263,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
-LS01_16,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.9,1000000.0,1.226,True,/Users/alyulina/Projects/Cancer/Data/cell-line-level/transplant/,none
+sample id,experiment,"time point, d",injection method,tissue,genotype,eartag (in vivo) / passage (in vitro),initial number of cells,"lung weight, g (in vivo) / cells (in vitro)",spike-in added,notes
+SK1_64,in vitro,3,,,,1,2000000,11200000,FALSE,started from pre-injection samples used in experiment 1
+SK1_65,in vitro,3,,,,2,2000000,13900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_66,in vitro,3,,,,3,2000000,9750000,FALSE,started from pre-injection samples used in experiment 1
+SK1_67,in vitro,6,,,,1,2000000,21900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_68,in vitro,6,,,,2,2000000,21200000,FALSE,started from pre-injection samples used in experiment 1
+SK1_69,in vitro,6,,,,3,2000000,23600000,FALSE,started from pre-injection samples used in experiment 1
+SK1_70,in vitro,9,,,,1,2000000,22000000,FALSE,started from pre-injection samples used in experiment 1
+SK1_71,in vitro,9,,,,2,2000000,26700000,FALSE,started from pre-injection samples used in experiment 1
+SK1_72,in vitro,9,,,,3,2000000,26400000,FALSE,started from pre-injection samples used in experiment 1
+SK1_73,in vitro,12,,,,1,2000000,21900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_74,in vitro,12,,,,2,2000000,18600000,FALSE,started from pre-injection samples used in experiment 1
+SK1_75,in vitro,12,,,,3,2000000,22400000,FALSE,started from pre-injection samples used in experiment 1
+SK1_76,in vitro,15,,,,1,2000000,13800000,FALSE,started from pre-injection samples used in experiment 1
+SK1_77,in vitro,15,,,,2,2000000,15600000,FALSE,started from pre-injection samples used in experiment 1
+SK1_78,in vitro,15,,,,3,2000000,15100000,FALSE,started from pre-injection samples used in experiment 1
+SK1_79,in vitro,17,,,,1,2000000,23900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_80,in vitro,17,,,,2,2000000,22100000,FALSE,started from pre-injection samples used in experiment 1
+SK1_81,in vitro,17,,,,3,2000000,24900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_82,in vitro,20,,,,1,2000000,30400000,FALSE,started from pre-injection samples used in experiment 1
+SK1_83,in vitro,20,,,,2,2000000,25800000,FALSE,started from pre-injection samples used in experiment 1
+SK1_84,in vitro,20,,,,3,2000000,29400000,FALSE,started from pre-injection samples used in experiment 1
+SK1_85,in vitro,23,,,,1,2000000,26400000,FALSE,started from pre-injection samples used in experiment 1
+SK1_86,in vitro,23,,,,2,2000000,19900000,FALSE,started from pre-injection samples used in experiment 1
+SK1_87,in vitro,23,,,,3,2000000,20300000,FALSE,started from pre-injection samples used in experiment 1
+SK1_61,1,0,,,,1,2000000,,FALSE,none
+SK1_62,1,0,,,,2,2000000,,FALSE,none
+SK1_63,1,0,,,,3,2000000,,FALSE,none
+LA72_SK_10,2,0,,,,,2000000,,FALSE,none
+SK1_51,1,2,intravenous,lung,C57B6/129S F1,SK1855,2000000,0.2184,TRUE,none
+SK1_52,1,2,intravenous,lung,C57B6/129S F1,SK1856,2000000,0.2414,TRUE,none
+SK1_53,1,2,intravenous,lung,C57B6/129S F1,SK1857,2000000,0.2717,TRUE,none
+SK1_54,1,2,intravenous,lung,C57B6/129S F1,SK1858,2000000,0.224,TRUE,none
+SK1_55,1,2,intravenous,lung,C57B6/129S F1,SK1859,2000000,0.224,TRUE,none
+SK1_56,1,2,intravenous,lung,C57B6/129S F1,SK1860,2000000,0.2986,TRUE,none
+SK1_57,1,2,intravenous,lung,C57B6/129S F1,SK1861,2000000,0.3125,TRUE,none
+SK1_58,1,2,intravenous,lung,C57B6/129S F1,SK1862,2000000,0.3182,TRUE,"SK1_58:SK1_58_2 merged, one spike-in"
+SK1_58_2,1,2,intravenous,lung,C57B6/129S F1,SK1862,2000000,0.3182,TRUE,"SK1_58:SK1_58_2 merged, one spike-in"
+SK1_59,1,2,intravenous,lung,C57B6/129S F1,SK1863,2000000,0.3733,TRUE,"SK1_59:SK1_59_2 merged, one spike-in"
+SK1_59_2,1,2,intravenous,lung,C57B6/129S F1,SK1863,2000000,0.3733,TRUE,"SK1_59:SK1_59_2 merged, one spike-in"
+SK1_60,1,2,intravenous,lung,C57B6/129S F1,SK1864,2000000,0.3865,TRUE,"SK1_60:SK1_60_2 merged, one spike-in"
+SK1_60_2,1,2,intravenous,lung,C57B6/129S F1,SK1864,2000000,0.3865,TRUE,"SK1_60:SK1_60_2 merged, one spike-in"
+SK1_45,1,2,intravenous,lung,Rag1-/-,MT2284,2000000,0.091,TRUE,"SK1_45:SK1_46 merged, separate spike-ins"
+SK1_46,1,2,intravenous,lung,Rag1-/-,MT2284,2000000,0.1115,TRUE,"SK1_45:SK1_46 merged, separate spike-ins"
+SK1_47,1,2,intravenous,lung,Rag1-/-,CM3700,2000000,0.102,TRUE,"SK1_47:SK1_48 merged, separate spike-ins"
+SK1_48,1,2,intravenous,lung,Rag1-/-,CM3700,2000000,0.079,TRUE,"SK1_47:SK1_48 merged, separate spike-ins"
+SK1_49,1,2,intravenous,lung,Rag1-/-,CM3703,2000000,0.0954,TRUE,"SK1_49:SK1_50 merged, separate spike-ins"
+SK1_50,1,2,intravenous,lung,Rag1-/-,CM3703,2000000,0.07,TRUE,"SK1_49:SK1_50 merged, separate spike-ins"
+SK1_25,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000,0.428,TRUE,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
+SK1_26,1,22,intravenous,lung,C57B6/129S F1,SK1866,200000,0.304,TRUE,none
+SK1_27,1,22,intravenous,lung,C57B6/129S F1,SK1867,200000,0.305,TRUE,none
+SK1_28,1,22,intravenous,lung,C57B6/129S F1,SK1868,200000,0.298,TRUE,none
+SK1_29,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000,0.292,TRUE,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
+SK1_30,1,22,intravenous,lung,C57B6/129S F1,SK1870,200000,0.24,TRUE,none
+SK1_31,1,22,intravenous,lung,C57B6/129S F1,SK1871,200000,0.378,TRUE,none
+SK1_32,1,22,intravenous,lung,C57B6/129S F1,SK1872,200000,0.334,TRUE,none
+SK1_33,1,22,intravenous,lung,C57B6/129S F1,SK1873,200000,0.314,TRUE,none
+SK1_34,1,22,intravenous,lung,C57B6/129S F1,SK1874,200000,0.56,TRUE,none
+SK1_35,1,22,intravenous,lung,C57B6/129S F1,SK1875,200000,0.414,TRUE,none
+SK1_36,1,22,intravenous,lung,C57B6/129S F1,SK1876,200000,0.36,TRUE,none
+SK1_37,1,22,intravenous,lung,C57B6/129S F1,SK1877,200000,0.406,TRUE,none
+SK1_38,1,22,intravenous,lung,C57B6/129S F1,SK1878,200000,0.219,TRUE,none
+SK1_39,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000,0.434,TRUE,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
+SK1_40,1,22,intravenous,lung,C57B6/129S F1,SK1880,200000,0.354,TRUE,none
+SK1_41,1,22,intravenous,lung,C57B6/129S F1,SK1881,200000,0.276,TRUE,none
+SK1_42,1,22,intravenous,lung,C57B6/129S F1,SK1882,200000,0.294,TRUE,none
+SK1_43,1,22,intravenous,lung,C57B6/129S F1,SK1883,200000,0.313,TRUE,none
+SK1_44,1,22,intravenous,lung,C57B6/129S F1,SK1884,200000,0.329,TRUE,none
+SK1_88,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000,0.428,TRUE,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
+SK1_89,1,22,intravenous,lung,C57B6/129S F1,SK1865,200000,0.428,TRUE,"SK1_25:SK1_88:SK1_89 merged, one spike-in"
+SK1_90,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000,0.434,TRUE,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
+SK1_91,1,22,intravenous,lung,C57B6/129S F1,SK1879,200000,0.434,TRUE,"SK1_39:SK1_90:SK1_91 merged, one spike-in"
+SK1_92,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000,0.292,TRUE,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
+SK1_93,1,22,intravenous,lung,C57B6/129S F1,SK1869,200000,0.292,TRUE,"SK1_29:SK1_92:SK1_93 merged, one spike-in"
+LA67_1,1,22,intravenous,pancreas,C57B6/129S F1,SK1865,200000,,FALSE,none
+LA67_2,1,22,intravenous,pancreas,C57B6/129S F1,SK1866,200000,,FALSE,none
+LA67_3,1,22,intravenous,pancreas,C57B6/129S F1,SK1867,200000,,FALSE,none
+LA67_4,1,22,intravenous,pancreas,C57B6/129S F1,SK1868,200000,,FALSE,none
+LA67_5,1,22,intravenous,pancreas,C57B6/129S F1,SK1869,200000,,FALSE,none
+LA67_6,1,22,intravenous,pancreas,C57B6/129S F1,SK1870,200000,,FALSE,none
+LA67_7,1,22,intravenous,pancreas,C57B6/129S F1,SK1871,200000,,FALSE,none
+LA67_8,1,22,intravenous,pancreas,C57B6/129S F1,SK1872,200000,,FALSE,none
+LA67_9,1,22,intravenous,pancreas,C57B6/129S F1,SK1873,200000,,FALSE,none
+LA67_10,1,22,intravenous,pancreas,C57B6/129S F1,SK1874,200000,,FALSE,none
+LA67_11,1,22,intravenous,pancreas,C57B6/129S F1,SK1875,200000,,FALSE,none
+LA67_12,1,22,intravenous,pancreas,C57B6/129S F1,SK1876,200000,,FALSE,none
+LA67_13,1,22,intravenous,pancreas,C57B6/129S F1,SK1877,200000,,FALSE,none
+LA67_14,1,22,intravenous,pancreas,C57B6/129S F1,SK1878,200000,,FALSE,none
+LA67_15,1,22,intravenous,pancreas,C57B6/129S F1,SK1879,200000,,FALSE,none
+LA67_16,1,22,intravenous,pancreas,C57B6/129S F1,SK1880,200000,,FALSE,none
+LA67_17,1,22,intravenous,pancreas,C57B6/129S F1,SK1881,200000,,FALSE,none
+LA67_18,1,22,intravenous,pancreas,C57B6/129S F1,SK1883,200000,,FALSE,none
+LA67_19,1,22,intravenous,pancreas,C57B6/129S F1,SK1884,200000,,FALSE,none
+SK1_1,1,21,intravenous,lung,Rag1-/-,CM3633,200000,0.22,TRUE,none
+SK1_2,1,21,intravenous,lung,Rag1-/-,SL44,200000,0.1842,TRUE,none
+SK1_3,1,21,intravenous,lung,Rag1-/-,SL50,200000,0.182,TRUE,none
+SK1_4,1,21,intravenous,lung,Rag1-/-,SL048,200000,0.461,TRUE,none
+SK1_5,1,21,intravenous,lung,Rag1-/-,SL047,200000,0.256,TRUE,none
+SK1_6,1,21,intravenous,lung,Rag1-/-,SL177,200000,0.287,TRUE,none
+SK1_7,1,21,intravenous,lung,Rag1-/-,SL179,200000,0.437,TRUE,none
+SK1_9,1,21,intravenous,lung,Rag1-/-,CM3635,200000,0.181,TRUE,none
+SK1_10,1,21,intravenous,lung,Rag1-/-,CM3638,200000,0.222,TRUE,none
+SK1_12,1,21,intravenous,lung,Rag1-/-,CM3681,200000,0.213,TRUE,none
+SK1_13,1,21,intravenous,lung,Rag1-/-,SL046,200000,0.166,TRUE,none
+SK1_14,1,21,intravenous,lung,Rag1-/-,SL051,200000,0.213,TRUE,none
+SK1_15,1,21,intravenous,lung,Rag1-/-,CM3705,200000,0.232,TRUE,none
+SK1_16,1,21,intravenous,lung,Rag1-/-,MT2362,200000,0.205,TRUE,none
+SK1_17,1,21,intravenous,lung,Rag1-/-,MT2359,200000,0.189,TRUE,none
+SK1_18,1,21,intravenous,lung,Rag1-/-,SL101,200000,0.162,TRUE,none
+SK1_19,1,21,intravenous,lung,Rag1-/-,SL103,200000,0.17,TRUE,none
+SK1_20,1,21,intravenous,lung,Rag1-/-,SL176,200000,0.171,TRUE,none
+SK1_21,1,21,intravenous,lung,Rag1-/-,SL178,200000,0.285,TRUE,none
+SK1_22,1,21,intravenous,lung,Rag1-/-,SL180,200000,0.158,TRUE,none
+SK1_23,1,21,intravenous,lung,Rag1-/-,SL175,200000,0.215,TRUE,none
+SK1_24,1,21,intravenous,lung,Rag1-/-,CM3725,200000,0.27,TRUE,none
+SK1_111,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1885,2000000,,TRUE,"SK111_2:SK1_111 merged, one spike-in"
+SK111_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1885,2000000,,TRUE,"SK111_2:SK1_111 merged, one spike-in"
+SK1_112,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1886,2000000,,TRUE,"SK112_2:SK1_112 merged, one spike-in"
+SK112_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1886,2000000,,TRUE,"SK112_2:SK1_112 merged, one spike-in"
+SK113,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1889,2000000,,TRUE,none
+SK1_114,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1890,2000000,,TRUE,"SK114_2:SK1_114 merged, one spike-in"
+SK114_2,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1890,2000000,,TRUE,"SK114_2:SK1_114 merged, one spike-in"
+SK115,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1891,2000000,,TRUE,none
+SK116,1,22,intraperitoneal,peritoneal fat,C57B6/129S F1,SK1892,2000000,,TRUE,none
+SK1_94,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1885,2000000,,TRUE,"SK1_94:SK94_2 merged, one spike-in"
+SK94_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1885,2000000,,TRUE,"SK1_94:SK94_2 merged, one spike-in"
+SK1_95,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1886,2000000,,TRUE,"SK1_95:SK95_2 merged, one spike-in"
+SK95_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1886,2000000,,TRUE,"SK1_95:SK95_2 merged, one spike-in"
+SK96,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1887,2000000,,TRUE,none
+SK97,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1888,2000000,,TRUE,none
+SK98,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1889,2000000,,TRUE,none
+SK1_99,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1890,2000000,,TRUE,"SK1_99:SK99_2 merged, one spike-in"
+SK99_2,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1890,2000000,,TRUE,"SK1_99:SK99_2 merged, one spike-in"
+SK100,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1891,2000000,,TRUE,none
+SK101,1,22,intraperitoneal,pancreas,C57B6/129S F1,SK1892,2000000,,TRUE,none
+SK102,1,21,intraperitoneal,pancreas,C57B6/129S F1,SK1893,2000000,,TRUE,none
+SK1_103,1,22,intraperitoneal,liver,C57B6/129S F1,SK1885,2000000,,TRUE,"SK103_2:SK1_103 merged, one spike-in"
+SK103_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1885,2000000,,TRUE,"SK103_2:SK1_103 merged, one spike-in"
+SK1_104,1,22,intraperitoneal,liver,C57B6/129S F1,SK1886,2000000,,TRUE,"SK104_2:SK1_104 merged, one spike-in"
+SK104_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1886,2000000,,TRUE,"SK104_2:SK1_104 merged, one spike-in"
+SK105,1,22,intraperitoneal,liver,C57B6/129S F1,SK1888,2000000,,TRUE,none
+SK106,1,22,intraperitoneal,liver,C57B6/129S F1,SK1889,2000000,,TRUE,none
+SK1_107,1,22,intraperitoneal,liver,C57B6/129S F1,SK1890,2000000,,TRUE,"SK107_2:SK1_107 merged, one spike-in"
+SK107_2,1,22,intraperitoneal,liver,C57B6/129S F1,SK1890,2000000,,TRUE,"SK107_2:SK1_107 merged, one spike-in"
+SK108,1,22,intraperitoneal,liver,C57B6/129S F1,SK1891,2000000,,TRUE,none
+SK109,1,22,intraperitoneal,liver,C57B6/129S F1,SK1892,2000000,,TRUE,none
+SK110,1,21,intraperitoneal,liver,C57B6/129S F1,SK1893,2000000,,TRUE,none
+LS01_01A,2,2,intravenous,lung,C57B6/129S F1,SK2.1.1,2000000,0.238,TRUE,"LS01_01A:LS01_01B merged, one spike-in"
+LS01_01B,2,2,intravenous,lung,C57B6/129S F1,SK2.1.1,2000000,0.238,TRUE,"LS01_01A:LS01_01B merged, one spike-in"
+LS01_02A,2,2,intravenous,lung,C57B6/129S F1,SK2.1.2,2000000,0.304,TRUE,"LS01_02A:LS01_02B merged, one spike-in"
+LS01_02B,2,2,intravenous,lung,C57B6/129S F1,SK2.1.2,2000000,0.304,TRUE,"LS01_02A:LS01_02B merged, one spike-in"
+LS01_03,2,2,intravenous,lung,C57B6/129S F1,SK2.1.3,1500000,0.234,TRUE,none
+LS01_04,2,2,intravenous,lung,C57B6/129S F1,SK2.1.4,1500000,0.231,TRUE,none
+LS01_05,2,2,intravenous,lung,C57B6/129S F1,SK2.1.5,1500000,0.3716,TRUE,none
+LS01_06,2,2,intravenous,lung,C57B6/129S F1,SK2.1.6,1500000,0.2188,TRUE,none
+LS01_07,2,2,intravenous,lung,C57B6/129S F1,SK2.1.7,1500000,0.191,TRUE,none
+LS01_35,2,21,intravenous,lung,C57B6/129S F1,SK2.4.9,200000,1.044,TRUE,none
+LS01_36,2,21,intravenous,lung,C57B6/129S F1,SK2.4.10,200000,0.635,TRUE,none
+LS01_37,2,21,intravenous,lung,C57B6/129S F1,SK2.4.11,200000,0.439,TRUE,none
+LS01_38,2,21,intravenous,lung,C57B6/129S F1,SK2.4.12,200000,0.475,TRUE,none
+LS01_39,2,21,intravenous,lung,C57B6/129S F1,SK2.4.13,200000,0.522,TRUE,none
+LS01_40,2,21,intravenous,lung,C57B6/129S F1,SK2.4.14,200000,0.667,TRUE,none
+LS01_41,2,21,intravenous,lung,C57B6/129S F1,SK2.4.15,200000,0.39,TRUE,none
+LS01_42,2,21,intravenous,lung,C57B6/129S F1,SK2.4.16,200000,0.409,TRUE,none
+LS01_43A,2,21,intravenous,lung,C57B6/129S F1,SK2.4.17,200000,0.66,TRUE,"LS01_43A:LS01_43B merged, one spike-in"
+LS01_43B,2,21,intravenous,lung,C57B6/129S F1,SK2.4.17,200000,0.66,TRUE,"LS01_43A:LS01_43B merged, one spike-in"
+LS01_44A,2,21,intravenous,lung,C57B6/129S F1,SK2.4.18,200000,0.429,TRUE,"LS01_44A:LS01_44B merged, one spike-in"
+LS01_44B,2,21,intravenous,lung,C57B6/129S F1,SK2.4.18,200000,0.429,TRUE,"LS01_44A:LS01_44B merged, one spike-in"
+LS01_27,2,21,intravenous,lung,Rag1-/-,SK2.4.1,200000,0.635,TRUE,none
+LS01_28,2,21,intravenous,lung,Rag1-/-,SK2.4.2,200000,0.507,TRUE,none
+LS01_29,2,21,intravenous,lung,Rag1-/-,SK2.4.3,200000,0.486,TRUE,none
+LS01_30,2,21,intravenous,lung,Rag1-/-,SK2.4.4,200000,0.527,TRUE,none
+LS01_31,2,21,intravenous,lung,Rag1-/-,SK2.4.5,200000,0.427,TRUE,none
+LS01_33,2,21,intravenous,lung,Rag1-/-,SK2.4.7,200000,0.778,TRUE,none
+LS01_34,2,21,intravenous,lung,Rag1-/-,SK2.4.8,200000,0.265,TRUE,none
+LS01_18,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.2,1000000,0.869,TRUE,none
+LS01_19,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.3,1000000,1.836,TRUE,none
+LS01_20,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.4,1000000,0.6322,TRUE,none
+LS01_21,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.5,1000000,1.335,TRUE,none
+LS01_22,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.6,1000000,1.239,TRUE,none
+LS01_24,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.8,1000000,1.015,TRUE,none
+LS01_25,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.9,1000000,0.787,TRUE,none
+LS01_26,2,21,intrapancreatic,pancreas,C57B6/129S F1,SK2.3.10,1000000,1.196,TRUE,none
+LS01_08,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.1,1000000,3.928,TRUE,none
+LS01_09,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.2,1000000,3.189,TRUE,none
+LS01_10,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.3,1000000,4.2,TRUE,none
+LS01_11,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.4,1000000,4.257,TRUE,none
+LS01_12,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.5,1000000,4.0018,TRUE,none
+LS01_13,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.6,1000000,3.467,TRUE,none
+LS01_14,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.7,1000000,4.385,TRUE,none
+LS01_15,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.8,1000000,5.263,TRUE,none
+LS01_16,2,21,intrasplenic,liver,C57B6/129S F1,SK2.2.9,1000000,1.226,TRUE,none
