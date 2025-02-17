@@ -1,21 +1,28 @@
-**Extracting barcodes and cell line IDs:**  
-(change this to a readable readme)
-To find and extract clonal barcodes and cell line IDs, execute `1_find_barcodes.sh`, which in turn will run `find_barcodes.py`.  
+## Extracting clonal and cell line barcodes
 
-Running this code requires a list of demultiplexed samples (`samples.txt`), a folder for slurm output called `slurm`, and a folder for output called `out`. The `1_find_barcodes.sh` will first unzip the `.fq.gz` and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure that these steps work correctly! The renaming step only works for certain kinds of names so check the slurm output files to make sure that that step worked. Also, make sure to change the paths to data accordingly. If running for the first time, install regex first w/  
-```
-pip3 install --user regex
-```
+**Requirements:** `python 3.6.1` or above, `numpy 1.18.1` or above, `re 2.2.1` or above, `bartender` (Zhao *et al.*, 2017).
 
-Doing the above should produce four kinds of output files:  
-    (i) `<sample>_find_barcodes_stats.txt` w/ stats on the number of reads that were processed and filtered out;  
-    (ii) `<sample>_failed_clIDs.txt` w/ output for reads that passed qc but had a mismatch in clID;  
-    (iii) `<sample>_clID_bc_extracted.txt` –- a file with clIDs and barcodes from all reads (`.fq entry number \t clID \t barcode \n`);  
-    (iv) `<sample>_clID_bc_extracted.txt` -- same as above but split into separate files for each clID.  
+#### 1. Finding and extracting the barcode regions from raw reads  
+The code in `find_barcodes.py` finds and extracts the barcode region from raw reads, if the following conditions are satisfied:
+1. The forward and reverse reads match the regular expressions `TT([ATGC]{4})' + '([ATGC]{3}G[ATGC]{3}G[ATGC]{3}G[ATGC]{3}G)(GAAAC){e<2}` and `(GTTTC){e<2}(C[ATGC]{3}C[ATGC]{3}C[ATGC]{3}C[ATGC]{3})([ATGC]{4})AA`, respectively.
+2. The barcode region was sequenced with the average error rate of at most 1 error per 1000 nucleotides.
+3. The four-nucleotide cell-line identifier (clID) bolongs to those known *a priori*.  
+4. There is a perfect match between the two reads.
+
+Running this code requires a list of demultiplexed samples (see `samples.txt` for an example) + paired-end reads for each sample. If running on a cluster with the `slurm` job manager, simply execute 
+```
+sbatch 1_find_barcodes.sh
+```
+which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure to edit the relevant parts of the script so that it works correctly given the names of your files. Doing the above should produce four kinds of output files (see `out` for an example):  
+1. `sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out;  
+2. `sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements;  
+3. `sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads;  
+4. `sample_clID_rBC_extracted.txt` – same as above but split into separate files for each clID.  
     
-The first three files should be copied from `scratch` to `home` by the `1_find_barcodes.sh` script but this does not always work so make sure to double-check. All of the output is in the data folder.  
-
-*Only pairs reads if both the barcode and the clID in both reads match.*
-  
-**Clustering and counting barcodes:**  
-(make a readme)
+#### 2. Clustering and counting clonal barcodes within each cell line
+The code in `cluster_barcodes.py` performs clustering by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
+```
+sbatch 2_cluster_barcodes.sh
+```
+This should produce the followint output (see `out` for an example):  
+1. TODO
