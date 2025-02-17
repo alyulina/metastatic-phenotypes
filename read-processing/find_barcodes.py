@@ -39,17 +39,15 @@ regex_rv = re.compile('(GTTTC){e<2}' + '(C[ATGC]{3}C[ATGC]{3}C[ATGC]{3}C[ATGC]{3
 
 # cell line IDs; 
 # minumum Hamming distance between any two of them is 2
-# keeping TGCT but the cell line is not there
-clIDs = ['AACC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT',
-         'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GATC', 'GCAT', 'GCTA', 'GGAA', 'GGTT',
-         'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TGCT', 'TGTG', 'TTCC', 'TTGG']
+# excluded: all but one spike-ins & mt4-2D, which had the same clIDs
+clIDs = ['GATC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT', 'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GCAT', 'GCTA', 'GGAA', 'GGTT', 'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TTCC', 'TTGG']
 
 # input files w/ raw reads
 reads_r1 = open(sample_path + sample + '_R1.fq', 'r')
 reads_r2 = open(sample_path + sample + '_R2.fq', 'r')
 
 # output files
-clID_bc_out = open(sample_path + sample + '_clID_bc_extracted.txt', 'w+')
+clID_bc_out = open(sample_path + sample + '_clID_rBC_extracted.txt', 'w+')
 failed_clIDs_out = open(sample_path + sample + '_failed_clIDs.txt', 'w+')
 
 # dict. w/ clIDs as keys and bartender input as values
@@ -170,5 +168,5 @@ stats_out.close()
 for i in clIDs:
     if len(clID_bc_dict[i]) == 0:
         continue # writing output only if there are barcodes for this cell line
-    with open(sample_path + sample + '_' + i + '_bc_extracted.txt', 'w+') as o:
+    with open(sample_path + sample + '_' + i + '_rBC_extracted.txt', 'w+') as o:
         o.writelines(clID_bc_dict[i])
