@@ -13,16 +13,11 @@ Running this code requires a list of demultiplexed samples (see `samples.txt` fo
 ```
 sbatch 1_find_barcodes.sh
 ```
-which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure to edit the relevant parts of the script so that it works correctly given the names of your files. Doing the above should produce four kinds of output files (see `out` for an example):  
-1. `sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out;  
-2. `sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements;  
-3. `sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads;  
-4. `sample_clID_rBC_extracted.txt` – same as above but split into separate files for each clID.  
+which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure to edit the relevant parts of the script so that it works correctly given the names of your files. Doing the above should produce the following output files for each sample: `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out; `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements; `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads; `./out/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
 The code in `cluster_barcodes.py` performs clustering by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
 ```
 sbatch 2_cluster_barcodes.sh
 ```
-This should produce the followint output (see `out` for an example):  
-1. TODO
+This should produce the followint output: `sample_clID_rBC_cluster_counts.txt`, a file that contains how many times each barcode cluster was seen. You can find these counts in `../data/bc-counts` for all samples listed in `../data/metadata.csv`.
