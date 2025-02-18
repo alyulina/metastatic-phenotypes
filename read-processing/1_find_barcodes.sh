@@ -26,10 +26,10 @@ data="/scratch/users/alyulina/raw-reads"
 echo "${data}"
 
 # read sample id
-sample=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
+sample_id=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 
 # go to where the data is
-cd "${data}"/"$sample"/
+cd "${data}"/"$sample_id"/
 
 # unzip all .fq.gz files
 for i in *.fq.gz; do
@@ -52,8 +52,8 @@ done
 # go back
 cd "$dir"
 
-srun --cpu_bind=verbose find_barcodes.py -s "$sample" -p "${data}"/
+srun --cpu_bind=verbose python3 find_barcodes.py -s "$sample_id" -p "${data}"/
 
-cp "${data}"/"$sample"/*_clID_bc_extracted.txt ./out
-cp "${data}"/"$sample"/*_failed_clIDs.txt ./out
-cp "${data}"/"$sample"/*_find_barcodes_stats.txt ./out
+# cp "${data}"/"$sample_id"/*_clID_bc_extracted.txt ./out
+# cp "${data}"/"$sample_id"/*_failed_clIDs.txt ./out
+# cp "${data}"/"$sample_id"/*_find_barcodes_stats.txt ./out

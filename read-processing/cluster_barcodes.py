@@ -10,11 +10,18 @@ parser.add_option("-s",
                   help="sample ID as in samples.txt",
                   dest="sample")
 
+parser.add_option("-p",
+                  "--path",
+                  type="string",
+                  help="path to raw reads (with a backslash at the end)",
+                  dest="path")
+
 (options, args) = parser.parse_args()
 sample = options.sample
+path = options.path
 
 # path to the folder w/ raw data for this sample
-sample_path = '/scratch/users/alyulina/novogene_01.09.2023_X202SC22123847-Z01-F001/01.RawData/' + sample + '/'
+sample_path = path + sample + '/'
 bartender_path = '/home/groups/dpetrov/SOFTWARE/bartender-1.1-master/'
 
 # cell line IDs, same as before, i.e.
