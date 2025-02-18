@@ -13,7 +13,7 @@ Running this code requires a list of demultiplexed samples (see `samples.txt` fo
 ```
 sbatch 1_find_barcodes.sh
 ```
-which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files, merge reads that came from from different lanes, and then rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`. Doing the above should produce the following output files for each sample:  
+The script will first unzip the `.fq.gz` files, merge reads that came from from different lanes, rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`, and finally, run `find_barcodes.py`. This should produce the following output files for each sample:  
 `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out;  
 `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements;  
 `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads;  
