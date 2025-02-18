@@ -29,7 +29,6 @@ bartender_path = '/home/groups/dpetrov/SOFTWARE/bartender-1.1-master/'
 # excluded: all but one spike-ins & mt4-2D, which had the same clIDs
 clIDs = ['GATC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT', 'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GCAT', 'GCTA', 'GGAA', 'GGTT', 'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TTCC', 'TTGG']
 
-
 clID_bc_count = [] # a list w/ clID_bc \t count \n
 
 # want to have: a merged file for all cell lines for a sample w/ cell line ID, cluster center, and count for this cluster within each cell line

@@ -39,10 +39,9 @@ done
 # get unique sample names
 for file in *_L*_*.fq; do
     sample=$(echo "$file" | sed -E 's/(_L[0-9]+_[12]\.fq)$//')
-
-    # merge reads and sort to preserve order
+    
     for readnum in 1 2; do
-        cat ${sample}_L*_${readnum}.fq | paste - - - - | sort -k1,1 | tr '\t' '\n' > "${sample}_R${readnum}.fq"
+        cat ${sample}_*_L*_${readnum}.fq > "${sample}_R${readnum}.fq"
     done
 done
 
