@@ -22,7 +22,7 @@ echo $SLURM_ARRAY_TASK_ID
 dir=$PWD
 echo $dir
 
-data="/scratch/users/alyulina/novogene_01.09.2023_X202SC22123847-Z01-F001/01.RawData"
+data="/scratch/users/alyulina/raw-reads"
 echo "${data}"
 
 # read sample id
@@ -31,11 +31,25 @@ sample=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 # go to where the data is
 cd "${data}"/"$sample"/
 
-# unzip .fq files
-for i in *.fq.gz; do gzip -cd "$i" > "${i%.*}"; done
+#!/bin/bash
 
-# rename unzipped .fq files
-for i in *.fq; do cp $i $(echo $i | awk '{split($1,a,/_/); print a[1]"_"a[2]"_R"a[6]}'); done
+# unzip all .fq.gz files
+for i in *.fq.gz; do
+    gzip -cd "$i" > "${i%.gz}"
+done
+
+# get unique sample prefixes
+for file in *_L*_*.fq; do
+    sample=$(echo "$file" | awk -F'_' '{OFS="_"; print $1, $2}' | sed 's/_$//')
+    
+    # merge reads from multiple lanes
+    for readnum in 1 2; do
+        cat ${sample}_*_L*_${readnum}.fq > "${sample}_R${readnum}.fq"
+    done
+done
+
+# clean up: remove original unmerged .fq files
+# rm *_L*_*.fq
 
 # go back
 cd "$dir"
