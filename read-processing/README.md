@@ -17,7 +17,7 @@ which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.
 `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out;  
 `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements;  
 `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads;  
-`./out/sample/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
+`./out/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
 The code in `cluster_barcodes.py` performs clusters extracted clonal barcodes within each cell line by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
