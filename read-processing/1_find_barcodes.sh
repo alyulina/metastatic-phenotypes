@@ -5,7 +5,7 @@
 #SBATCH --partition hns,dpetrov,normal
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=32G
-#SBATCH --array=1-42
+#SBATCH --array=1-191
 #SBATCH --no-requeue
 #SBATCH --mail-user=alyulina@stanford.edu
 #SBATCH --mail-type=ALL
