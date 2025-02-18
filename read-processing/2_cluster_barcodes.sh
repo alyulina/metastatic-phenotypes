@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=find_barcodes
+#SBATCH --job-name=cluster_barcodes
 #SBATCH --output=./slurm/slurm_find_barcodes_%A-%a.out
 #SBATCH --partition hns,dpetrov,normal
 #SBATCH --time=1:00:00

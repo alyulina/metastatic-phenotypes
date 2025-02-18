@@ -31,18 +31,16 @@ sample_id=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 # go to where the data is
 cd "${data}"/"$sample_id"/
 
+# note that this only works for some names but not all
+ls *_1.fq.gz | cut -d _ -f 1-3 | uniq \
+    | while read id; do \
+        cat $id*_*_1.fq.gz > ${id%_*}_R1.fq.gz; \
+        cat $id*_*_2.fq.gz > ${id%_*}_R2.fq.gz; \
+    done
+    
 # unzip all .fq.gz files
 for i in *.fq.gz; do
     gzip -cd "$i" > "${i%.gz}"
-done
-
-# get unique sample names
-for file in *_L*_*.fq; do
-    sample=$(echo "$file" | sed -E 's/(_L[0-9]+_[12]\.fq)$//')
-    
-    for readnum in 1 2; do
-        cat ${sample}_*_L*_${readnum}.fq > "${sample}_R${readnum}.fq"
-    done
 done
 
 # clean up: remove original unmerged .fq files
