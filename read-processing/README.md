@@ -9,11 +9,11 @@ The code in `find_barcodes.py` finds and extracts the barcode region from raw re
 3. The four-nucleotide cell-line identifier (clID) bolongs to those known *a priori*.  
 4. There is a perfect match between the two reads.
 
-Running this code requires a list of demultiplexed samples (see `samples.txt` for an example) + paired-end reads for each sample. If running on a cluster with the `slurm` job manager, simply execute 
+Running this code requires a list of demultiplexed samples (see `samples.txt` for an example) + paired-end reads for each sample (see `raw-reads`). If running on a cluster with the `slurm` job manager, simply execute 
 ```
 sbatch 1_find_barcodes.sh
 ```
-which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files and then rename them to follow names from the list of samples and an `_R1` or `_R2` suffix – make sure to edit the relevant parts of the script so that it works correctly given the names of your files. Doing the above should produce the following output files for each sample: `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out; `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements; `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads; `./out/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
+which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files, merge reads that came from from different lanes, and then rename the files with forward and reverse reads to `sample_R1.fq` and `sample_R2.fq` – make sure to edit the relevant parts of the script so that it works correctly given the names of your files. Doing the above should produce the following output files for each sample: `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out; `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements; `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads; `./raw-reads/sample/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
 The code in `cluster_barcodes.py` performs clusters extracted clonal barcodes within each cell line by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
