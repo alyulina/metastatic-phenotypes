@@ -38,13 +38,13 @@ for i in *.fq.gz; do
     gzip -cd "$i" > "${i%.gz}"
 done
 
-# get unique sample prefixes
+# get unique sample names
 for file in *_L*_*.fq; do
-    sample=$(echo "$file" | awk -F'_' '{OFS="_"; print $1, $2}' | sed 's/_$//')
-    
-    # merge reads from multiple lanes
+    sample=$(echo "$file" | sed -E 's/_CKDL.*//')
+
+    # merge reads, then sort them to preserve order
     for readnum in 1 2; do
-        cat ${sample}_*_L*_${readnum}.fq > "${sample}_R${readnum}.fq"
+        cat ${sample}_L*_${readnum}.fq | paste - - - - | sort -k1,1 | tr '\t' '\n' > "${sample}_R${readnum}.fq"
     done
 done
 
@@ -56,6 +56,6 @@ cd "$dir"
 
 srun --cpu_bind=verbose find_barcodes.py -s "$sample" -p "${data}"/
 
-cp "${data}"/"$sample"/*_clID_rBC_extracted.txt ./out
+cp "${data}"/"$sample"/*_clID_bc_extracted.txt ./out
 cp "${data}"/"$sample"/*_failed_clIDs.txt ./out
 cp "${data}"/"$sample"/*_find_barcodes_stats.txt ./out
