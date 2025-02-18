@@ -56,6 +56,6 @@ cd "$dir"
 
 srun --cpu_bind=verbose find_barcodes.py -s "$sample" -p "${data}"/
 
-cp "${data}"/"$sample"/*_clID_bc_extracted.txt ./out
+cp "${data}"/"$sample"/*_clID_rBC_extracted.txt ./out
 cp "${data}"/"$sample"/*_failed_clIDs.txt ./out
 cp "${data}"/"$sample"/*_find_barcodes_stats.txt ./out

@@ -1,0 +1,4 @@
+Total reads: 1835847
+Had a regex match and a high q-score but did not pair well: 101217
+Passed qc but no clID match: 13984
+Passed qc and had a known clID: 1537241
