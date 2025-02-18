@@ -31,8 +31,6 @@ sample=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 # go to where the data is
 cd "${data}"/"$sample"/
 
-#!/bin/bash
-
 # unzip all .fq.gz files
 for i in *.fq.gz; do
     gzip -cd "$i" > "${i%.gz}"
@@ -40,9 +38,9 @@ done
 
 # get unique sample names
 for file in *_L*_*.fq; do
-    sample=$(echo "$file" | sed -E 's/_CKDL.*//')
+    sample=$(echo "$file" | sed -E 's/(_L[0-9]+_[12]\.fq)$//')
 
-    # merge reads, then sort them to preserve order
+    # merge reads and sort to preserve order
     for readnum in 1 2; do
         cat ${sample}_L*_${readnum}.fq | paste - - - - | sort -k1,1 | tr '\t' '\n' > "${sample}_R${readnum}.fq"
     done
