@@ -13,7 +13,11 @@ Running this code requires a list of demultiplexed samples (see `samples.txt` fo
 ```
 sbatch 1_find_barcodes.sh
 ```
-which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files, merge reads that came from from different lanes, and then rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`. Doing the above should produce the following output files for each sample: `./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out; `./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements; `./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads; `./raw-reads/sample/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
+which in turn will run `find_barcodes.py`. The script will first unzip the `.fq.gz` files, merge reads that came from from different lanes, and then rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`. Doing the above should produce the following output files for each sample:  
+`./out/sample_find_barcodes_stats.txt` with stats on the number of reads that were filtered out;  
+`./out/sample_failed_clIDs.txt` containing reads that had a mismatch in clID but satisfied all other requirements;  
+`./out/sample_clIDs_rBC_extracted.txt`, which contains clIDs and clonal barcodes from all reads;  
+`./raw-reads/sample/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
 The code in `cluster_barcodes.py` performs clusters extracted clonal barcodes within each cell line by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
