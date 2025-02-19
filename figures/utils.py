@@ -25,7 +25,7 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
 # cell line IDs, spike-in must be first
-# excluded: other spike-ins & mt4-2D, which hade the same clIDs
+# excluded: other spike-ins & mt4-2D, which had the same clIDs
 clIDs = ['GATC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT', 'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GCAT', 'GCTA', 'GGAA', 'GGTT', 'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TTCC', 'TTGG']
 
 # corresponding cell line labels
@@ -94,7 +94,7 @@ def convert_barcode_reads_to_cell_counts(sample_ids, path_to_data,
         sub_samples = sample.split(':') 
                         
         for sub_sample in sub_samples:
-            file_path = os.path.join(path_to_data, f"{sub_sample}_merged_clIDs_bc_clusters_counts.txt")
+            file_path = os.path.join(path_to_data, f"{sub_sample}_clIDs_rBC_cluster_counts.txt")
             if not os.path.exists(file_path):
                 print(f"File {file_path} not found.")
                 continue
@@ -188,7 +188,7 @@ def bootstrap_relative_burden(samples, read_counts, cell_counts, metadata, clIDs
     clID__exp_err = {} # 0.95 ci of the above
     
     n_samples = len(samples)
-    experiment = metadata.loc[[s for s in samples if ':' not in s], 'experiment'].iloc[0]    
+    experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in samples], 'experiment'].iloc[0]    
     pre_injection = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
 
     # precompute pre-injection cell counts for each clID first,
@@ -221,6 +221,144 @@ def bootstrap_relative_burden(samples, read_counts, cell_counts, metadata, clIDs
     clIDs_sorted = [y[0] for y in sorted([[x, clID__exp_avg_relative_to_mean[x]] for x in clIDs if x != 'GATC'], key = lambda x: x[-1], reverse=True)]
 
     return clID__distr, clID__exp_avg_relative_to_mean, clID__exp_err, clIDs_sorted
+
+
+def bootstrap_n_tumors(samples, path_to_data, read_counts, cell_counts, metadata, clIDs=clIDs, B=10000):
+    """
+    Bootstrapps mice to estimate the relative metastatic or tumor burden of different cell lines.
+
+    Args:
+        samples (list): Samples to include in the analysis; 
+                        merged samples need to be colon-separated.
+        path_to_data (str): Path to the folder containing files with read counts.
+        read_counts (pandas.DataFrame): A precomputed table with read counts (read_counts_by_cell_line.csv).
+        cell_counts (pandas.DataFrame): A precomputed table with cell line counts (cell_counts_by_cell_line.csv).
+        metadata (pandas.DataFrame): A table containing experimental details, including initial cell numbers (metadata.csv).
+        clIDs (list): Four-nucleotide cell line IDs, optional.
+        B (int): Number of bootstrap resampling iterations, optional (default=10000).
+
+    Returns:
+        clID__distr (dict): Bootstrapped distributions of normalized tumor number, relative to initial cell line proportion
+                            across mice j for each cell line i (sum_{j} n_{ij} / n_{i}(0)).
+        clID__n_tumors_relative_to_mean (dict): Average of the tumor number distribution of each cell line
+                                                relative to the mean across all cell lines.
+        clID__err (dict): 0.95 confidence intervals for the relative burden estimates.
+        clIDs_sorted (list): Cell line identifiers sorted by their relative burden.
+    """
+    
+    # getting tumor sizes:
+    sample_clID_barcode__count = convert_barcode_reads_to_cell_counts(samples, path_to_data=path_to_data, read_counts=read_counts, metadata=metadata)
+
+    clID__n_tumors = {}
+    for sample in samples:
+        for i, clID in enumerate(clIDs[1:]):
+            if clID not in clID__n_tumors:
+                clID__n_tumors[clID] = []
+            clID__n_tumors[clID].append(len([x for x in sample_clID_barcode__count[sample][clID].values()]))
+        
+    clID__distr = {}  # bootstrap distributions of the number of tumors
+    clID__n_tumors_relative_to_mean = {} # weighted average across mice relative to average across all cell lines
+    clID__err = {} # 0.95 ci of the above
+    
+    n_samples = len(samples)
+    experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in samples], 'experiment'].iloc[0]    
+    pre_injection = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
+
+    # precompute pre-injection cell counts for each clID first,
+    # by finding thir fractions and multiplying by the total number of cells injected
+    n_0_dict = {clID: np.mean([read_counts[sample_id][clID] / sum(read_counts[sample_id][1:]) * pre_injection['initial number of cells'].mean() 
+                               for sample_id in pre_injection.index.tolist()]) for clID in clIDs if clID != 'GATC'}
+
+    # bootstrapping mices to make one big mouse
+    # this is equivalent to weighting each sample by the total number of cells and taking the avg
+    avgs = []
+    n_mice = len(next(iter(clID__n_tumors.values()))) 
+    for clID, n_0 in n_0_dict.items():
+        
+        mouse_i_samples = np.random.choice(range(n_mice), size=(B, n_mice), replace=True)
+        n_t = np.array([sum(clID__n_tumors[clID][mouse] for mouse in mouse_i) for mouse_i in mouse_i_samples])
+        clID__distr[clID] = n_t / (n_0 * B)
+        avgs.append(clID__distr[clID])
+        
+    mean_across_cell_lines = np.mean(avgs)
+
+    for clID in clIDs:
+        if clID == 'GATC':
+            continue
+        y = np.mean(clID__distr[clID])
+    
+        ci_upper = np.percentile(clID__distr[clID], 97.5)
+        ci_lower = np.percentile(clID__distr[clID], 2.5)
+        clID__err[clID] = [(y - ci_lower) / mean_across_cell_lines, (ci_upper - y) / mean_across_cell_lines]
+        clID__n_tumors_relative_to_mean[clID] = y / mean_across_cell_lines
+    
+    clIDs_sorted = [y[0] for y in sorted([[x, clID__n_tumors_relative_to_mean[x]] for x in clIDs if x != 'GATC'], key = lambda x: x[-1], reverse=True)]
+
+    return clID__distr, clID__n_tumors_relative_to_mean, clID__err, clIDs_sorted
+
+
+def bootstrap_tumor_size_percentiles(samples, path_to_data, percentiles, read_counts, metadata, clIDs=clIDs, B=10000):
+    """
+    Bootstraps tumor sizes from multiple mice and creates an artificial big mouse with all tumor sizes pooled.
+    Additionally, calculates percentiles of the distribution for each clID 
+    across pooled real mice and bootstraps to calculate 0.95 confidence intervals 
+    for those percentiles.
+    
+    Args:
+        samples (list): Samples to include in the analysis; 
+                        merged samples need to be colon-separated.
+        path_to_data (str): Path to the folder containing files with read counts.
+        percentiles (list): List with percentiles to compute.
+        read_counts (pandas.DataFrame): A precomputed table with read counts (read_counts_by_cell_line.csv).
+        cell_counts (pandas.DataFrame): A precomputed table with cell line counts (cell_counts_by_cell_line.csv).
+        metadata (pandas.DataFrame): A table containing experimental details, including initial cell numbers (metadata.csv).
+        clIDs (list): Four-nucleotide cell line IDs, optional.
+        B (int): Number of bootstrap resampling iterations, optional (default=10000).
+
+    Returns:
+        clID__distr (dict): Bootstrapped distributions of normalized tumor number, relative to initial cell line proportion
+                            across mice j for each cell line i (sum_{j} n_{ij} / n_{i}(0)).
+        clID__n_tumors_relative_to_mean (dict): Average of the tumor number distribution of each cell line
+                                                relative to the mean across all cell lines.
+        clID__err (dict): 0.95 confidence intervals for the relative burden estimates.
+        clIDs_sorted (list): Cell line identifiers sorted by their relative burden.
+
+    
+    Returns:
+        clID__percentiles (dict): Percentiles of the tumor size distributions.
+        clID__ci (dict): 0.95 confidence intervals for the percentiles.
+    """
+    clID__distr = {}
+    clID__percentiles = {}
+    clID__ci = {}
+    
+    # getting tumor sizes:
+    sample_clID_barcode__count = convert_barcode_reads_to_cell_counts(samples, path_to_data=path_to_data, read_counts=read_counts, metadata=metadata)
+    clID__tumor_sizes = {}
+    for sample in samples:
+        for i, clID in enumerate(clIDs[1:]):
+            if clID not in clID__tumor_sizes:
+                clID__tumor_sizes[clID] = {}
+            clID__tumor_sizes[clID][sample] = [x for x in sample_clID_barcode__count[sample][clID].values()]
+
+    
+    for clID, sample__sizes in clID__tumor_sizes.items():
+        all_tumor_sizes = [size for sample_sizes in sample__sizes.values() for size in sample_sizes]
+        clID__distr[clID] = all_tumor_sizes
+    
+        clID_percentiles = np.percentile(all_tumor_sizes, percentiles)
+        clID__percentiles[clID] = clID_percentiles
+    
+        bootstrap_percentiles = []
+        for _ in range(B):
+            resample = np.random.choice(all_tumor_sizes, size=len(all_tumor_sizes), replace=True)
+            bootstrap_percentiles.append(np.percentile(resample, percentiles))
+    
+        ci_lower = np.percentile(bootstrap_percentiles, 2.5, axis=0)
+        ci_upper = np.percentile(bootstrap_percentiles, 97.5, axis=0)
+        clID__ci[clID] = (ci_lower, ci_upper)
+    
+    return clID__percentiles, clID__ci
 
 
 # functions to make the many plots:
@@ -329,8 +467,8 @@ def comparison_scatter_plot(clIDs, # always exclude spike-in, sometimes Panc02 a
 
     spearmans_rho, spearmans_pval = sp.stats.spearmanr(xs, ys)  # rank correlation coefficient and p-value
     pearsons_r, pearsons_pval = sp.stats.pearsonr(xs, ys)  # Pearson correlation coefficient and p-value
-    ax.text(2 * lims[0], 0.3 * lims[1], f'ρ = {spearmans_rho:.2f}, p = {spearmans_pval:.2f}', size=10)
-    ax.text(2 * lims[0], 0.15 * lims[1], f'r = {pearsons_r:.2f}, p = {pearsons_pval:.2f}', size=10)
+    ax.text(2 * lims[0], 0.3 * lims[1], f'ρ = {spearmans_rho:.2f}, p = {spearmans_pval:.0e}', size=10)
+    ax.text(2 * lims[0], 0.15 * lims[1], f'r = {pearsons_r:.2f}, p = {pearsons_pval:.0e}', size=10)
 
     ax.set_xscale('log')
     ax.set_yscale('log')
