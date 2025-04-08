@@ -34,39 +34,73 @@ cell_line_labels = ['Spike-in 1', '7160c2', 'FC1199', '6694c2', '7160c5', 'BF857
 clID__label = dict(zip(clIDs, cell_line_labels))
 
 # colors based on 3w F1 lung expansion from experiment one
-clID__color_in_vivo = {'ACCT': (0.7568627450980392, 0.24313725490196078, 0.1803921568627451, 1.0),
-                       'AGAG': (0.9341176470588235, 0.4982698961937715, 0.4258823529411764, 1.0),
-                       'AGTC': (0.9388235294117646, 0.5134948096885812, 0.43999999999999995, 1.0),
-                       'CTGT': (0.9654901960784313, 0.5997693194925028, 0.52, 1.0),
-                       'CTTC': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
-                       'CAAC': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
-                       'TGAC': (0.9454671280276816, 0.7554325259515571, 0.6672664359861592, 1.0),
-                       'CCTT': (0.9336562860438292, 0.801199538638985, 0.7108189158016147, 1.0),
-                       'AGGT': (0.8975778546712803, 0.8717416378316032, 0.7831603229527104, 1.0),
-                       'GTGA': (0.865282583621684, 0.8583621683967705, 0.7808535178777393, 1.0),
-                       'GAAG': (0.8071510957324106, 0.8342791234140715, 0.7767012687427912, 1.0),
-                       'ACTG': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
-                       'CGTA': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
-                       'GTTG': (0.7296424452133794, 0.8021683967704729, 0.7711649365628604, 1.0),
-                       'CATG': (0.6908881199538639, 0.7861130334486736, 0.768396770472895, 1.0),
-                       'TTCC': (0.6521337946943483, 0.7700576701268742, 0.7656286043829296, 1.0),
-                       'GGTT': (0.645674740484429, 0.7673817762399077, 0.7651672433679354, 1.0),
-                       'ACGA': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
-                       'GGAA': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
-                       'TCCA': (0.6264821222606689, 0.7580622837370241, 0.7610149942329872, 1.0),
-                       'AAGG': (0.6201153402537485, 0.7547404844290657, 0.7591695501730104, 1.0),
-                       'CGAT': (0.5946482122260669, 0.7414532871972318, 0.7517877739331026, 1.0),
-                       'GTAC': (0.5882814302191465, 0.7381314878892733, 0.7499423298731257, 1.0),
-                       'ATGC': (0.5691810841983851, 0.7281660899653979, 0.7444059976931948, 1.0),
-                       'ACAC': (0.5373471741637832, 0.7115570934256055, 0.7351787773933103, 1.0),
-                       'CCAA': (0.29490196078431374, 0.5913725490196079, 0.659607843137255, 1.0),
-                       'TTGG': (0.24286043829296425, 0.5686735870818915, 0.6407843137254902, 1.0),
-                       'GCTA': (0.21683967704728951, 0.5573241061130334, 0.6313725490196078, 1.0),
-                       'GCAT': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
-                       'CACT': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
-                       'CAGA': (0.12143021914648212, 0.5157093425605537, 0.5968627450980393, 1.0),
-                       'ATCG': (0.06071510957324106, 0.4892272202998847, 0.5749019607843138, 1.0),
-                       'AGCA': (0.0, 0.4627450980392157, 0.5529411764705883, 1.0)}
+clID__color_in_vivo_exp1 = {'ACCT': (0.7568627450980392, 0.24313725490196078, 0.1803921568627451, 1.0),
+                            'AGAG': (0.9341176470588235, 0.4982698961937715, 0.4258823529411764, 1.0),
+                            'AGTC': (0.9388235294117646, 0.5134948096885812, 0.43999999999999995, 1.0),
+                            'CTGT': (0.9654901960784313, 0.5997693194925028, 0.52, 1.0),
+                            'CTTC': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
+                            'CAAC': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
+                            'TGAC': (0.9454671280276816, 0.7554325259515571, 0.6672664359861592, 1.0),
+                            'CCTT': (0.9336562860438292, 0.801199538638985, 0.7108189158016147, 1.0),
+                            'AGGT': (0.8975778546712803, 0.8717416378316032, 0.7831603229527104, 1.0),
+                            'GTGA': (0.865282583621684, 0.8583621683967705, 0.7808535178777393, 1.0),
+                            'GAAG': (0.8071510957324106, 0.8342791234140715, 0.7767012687427912, 1.0),
+                            'ACTG': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
+                            'CGTA': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
+                            'GTTG': (0.7296424452133794, 0.8021683967704729, 0.7711649365628604, 1.0),
+                            'CATG': (0.6908881199538639, 0.7861130334486736, 0.768396770472895, 1.0),
+                            'TTCC': (0.6521337946943483, 0.7700576701268742, 0.7656286043829296, 1.0),
+                            'GGTT': (0.645674740484429, 0.7673817762399077, 0.7651672433679354, 1.0),
+                            'ACGA': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
+                            'GGAA': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
+                            'TCCA': (0.6264821222606689, 0.7580622837370241, 0.7610149942329872, 1.0),
+                            'AAGG': (0.6201153402537485, 0.7547404844290657, 0.7591695501730104, 1.0),
+                            'CGAT': (0.5946482122260669, 0.7414532871972318, 0.7517877739331026, 1.0),
+                            'GTAC': (0.5882814302191465, 0.7381314878892733, 0.7499423298731257, 1.0),
+                            'ATGC': (0.5691810841983851, 0.7281660899653979, 0.7444059976931948, 1.0),
+                            'ACAC': (0.5373471741637832, 0.7115570934256055, 0.7351787773933103, 1.0),
+                            'CCAA': (0.29490196078431374, 0.5913725490196079, 0.659607843137255, 1.0),
+                            'TTGG': (0.24286043829296425, 0.5686735870818915, 0.6407843137254902, 1.0),
+                            'GCTA': (0.21683967704728951, 0.5573241061130334, 0.6313725490196078, 1.0),
+                            'GCAT': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
+                            'CACT': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
+                            'CAGA': (0.12143021914648212, 0.5157093425605537, 0.5968627450980393, 1.0),
+                            'ATCG': (0.06071510957324106, 0.4892272202998847, 0.5749019607843138, 1.0),
+                            'AGCA': (0.0, 0.4627450980392157, 0.5529411764705883, 1.0)}
+
+clID__color_in_vivo_exp2 = {'ACCT': (0.7568627450980392, 0.24313725490196078, 0.1803921568627451, 1.0),
+                            'AGTC': (0.9341176470588235, 0.4982698961937715, 0.4258823529411764, 1.0),
+                            'CTTC': (0.9388235294117646, 0.5134948096885812, 0.43999999999999995, 1.0),
+                            'AGAG': (0.9654901960784313, 0.5997693194925028, 0.52, 1.0),
+                            'CCTT': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
+                            'AGGT': (0.9670588235294117, 0.6048442906574394, 0.5247058823529412, 1.0),
+                            'CTGT': (0.9454671280276816, 0.7554325259515571, 0.6672664359861592, 1.0),
+                            'CAAC': (0.9336562860438292, 0.801199538638985, 0.7108189158016147, 1.0),
+                            'GGTT': (0.8975778546712803, 0.8717416378316032, 0.7831603229527104, 1.0),
+                            'GAAG': (0.865282583621684, 0.8583621683967705, 0.7808535178777393, 1.0),
+                            'GTTG': (0.8071510957324106, 0.8342791234140715, 0.7767012687427912, 1.0),
+                            'CGTA': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
+                            'GGAA': (0.7554786620530565, 0.8128719723183391, 0.7730103806228373, 1.0),
+                            'GTGA': (0.7296424452133794, 0.8021683967704729, 0.7711649365628604, 1.0),
+                            'ACTG': (0.6908881199538639, 0.7861130334486736, 0.768396770472895, 1.0),
+                            'ACGA': (0.6521337946943483, 0.7700576701268742, 0.7656286043829296, 1.0),
+                            'CATG': (0.645674740484429, 0.7673817762399077, 0.7651672433679354, 1.0),
+                            'TGAC': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
+                            'TTCC': (0.6328489042675893, 0.7613840830449826, 0.7628604382929642, 1.0),
+                            'GTAC': (0.6264821222606689, 0.7580622837370241, 0.7610149942329872, 1.0),
+                            'AAGG': (0.6201153402537485, 0.7547404844290657, 0.7591695501730104, 1.0),
+                            'TCCA': (0.5946482122260669, 0.7414532871972318, 0.7517877739331026, 1.0),
+                            'ACAC': (0.5882814302191465, 0.7381314878892733, 0.7499423298731257, 1.0),
+                            'CGAT': (0.5691810841983851, 0.7281660899653979, 0.7444059976931948, 1.0),
+                            'GCTA': (0.5373471741637832, 0.7115570934256055, 0.7351787773933103, 1.0),
+                            'ATGC': (0.29490196078431374, 0.5913725490196079, 0.659607843137255, 1.0),
+                            'CCAA': (0.24286043829296425, 0.5686735870818915, 0.6407843137254902, 1.0),
+                            'ATCG': (0.21683967704728951, 0.5573241061130334, 0.6313725490196078, 1.0),
+                            'TTGG': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
+                            'CACT': (0.19949250288350634, 0.5497577854671281, 0.6250980392156863, 1.0),
+                            'CAGA': (0.12143021914648212, 0.5157093425605537, 0.5968627450980393, 1.0),
+                            'GCAT': (0.06071510957324106, 0.4892272202998847, 0.5749019607843138, 1.0),
+                            'AGCA': (0.0, 0.4627450980392157, 0.5529411764705883, 1.0)}
 
 # highlighting replicate or related cell lines in plots
 clID_replicates__linestyle = {('AAGG', 'ACGA'): ':', ('AGTC', 'CTTC'): '-', ('ATCG', 'CACT'): '-', ('CAGA', 'GCAT'): '-'}
@@ -160,7 +194,7 @@ def convert_barcode_reads_to_cell_counts(sample_ids, path_to_data,
                 clID, barcode = clID_bc.split('_')
                 if clID not in clIDs: # this should not happen if barcodes were processed correctly
                     continue
-                sample__counts[sample][clID][barcode] = 50000 / (1 + R) * n_reads
+                sample__counts[sample][clID][barcode] = 50000 / (1 + R) * n_reads # 50,000 cells were spiked-in
 
     return sample__counts
 
@@ -289,13 +323,13 @@ def bootstrap_n_tumors(samples, path_to_data, read_counts, cell_counts, metadata
 
     # precompute pre-injection cell counts for each clID first,
     # by finding their fractions and multiplying by the total number of cells injected
-    n_0_dict = {clID: np.mean([read_counts[sample_id][clID] / sum(read_counts[sample_id][1:]) * pre_injection['initial number of cells'].mean()
+    clID__n_0 = {clID: np.mean([read_counts[sample_id][clID] / sum(read_counts[sample_id][1:]) * pre_injection['initial number of cells'].mean()
                                for sample_id in pre_injection.index.tolist()]) for clID in clIDs if clID != 'GATC'}
 
     # bootstrapping mice to make one big mouse
     bootstraps = []
     n_mice = len(next(iter(clID__n_tumors.values())))
-    for clID, n_0 in n_0_dict.items():
+    for clID, n_0 in clID__n_0.items():
 
         mouse_i_samples = np.random.choice(range(n_mice), size=(B, n_mice), replace=True)
         n_t = np.array([sum(clID__n_tumors[clID][mouse] for mouse in mouse_i) for mouse_i in mouse_i_samples])
@@ -304,15 +338,17 @@ def bootstrap_n_tumors(samples, path_to_data, read_counts, cell_counts, metadata
 
     bootstraps = np.array(bootstraps)
 
-    # normalize each bootstrap sample (across cell lines) by the average of n_t / n_0
-    normalized_bootstraps = bootstraps / np.mean(bootstraps, axis=1, keepdims=True)
+    # normalize each bootstrap sample (across cell lines) by the average of n_t / n_0 for that bootstrap
+    normalized_bootstraps = bootstraps / np.mean(bootstraps, axis=1, keepdims=True) # normalizes each row of bootstraps by its own row mean
 
-    original_mean_per_clID = {
-        clID: np.mean([len([x for x in sample__clID__barcode__count[sample][clID].values()]) for sample in samples])
-        for clID in clIDs if clID != 'GATC'
-    }
-    original_mean = np.mean(list(original_mean_per_clID.values()))
+    original_relative_n_per_clID = {} # relative to n_0, not yet normalized by the avg across all cell lines
+    for clID, n_0 in clID__n_0.items():
+        n_t = np.array([sum(clID__n_tumors[clID][mouse] for mouse in range(n_mice))])
+        original_relative_n_per_clID[clID] = n_t / n_0
+    
+    original_mean = np.mean(list(original_relative_n_per_clID.values()))
 
+    clID__n_tumors_relative_to_mean_original = {}
     for i, clID in enumerate(clID__distr):
         clID__distr_relative_to_mean[clID] = normalized_bootstraps[i]
 
@@ -322,15 +358,16 @@ def bootstrap_n_tumors(samples, path_to_data, read_counts, cell_counts, metadata
         ci_upper = np.percentile(clID__distr_relative_to_mean[clID], 97.5)
         ci_lower = np.percentile(clID__distr_relative_to_mean[clID], 2.5)
 
+        clID__n_tumors_relative_to_mean[clID] = np.mean(clID__distr_relative_to_mean[clID])
+        clID__n_tumors_relative_to_mean_original[clID] = original_relative_n_per_clID[clID] / original_mean
+
         clID__err[clID] = [np.mean(clID__distr_relative_to_mean[clID]) - ci_lower,
                            ci_upper - np.mean(clID__distr_relative_to_mean[clID])]
-
-        clID__n_tumors_relative_to_mean[clID] = original_mean_per_clID[clID] / original_mean
 
 
     clIDs_sorted = [y[0] for y in sorted([[x, clID__n_tumors_relative_to_mean[x]] for x in clIDs if x != 'GATC'], key = lambda x: x[-1], reverse=True)]
 
-    return clID__distr, clID__distr_relative_to_mean, clID__n_tumors_relative_to_mean, clID__err, clIDs_sorted
+    return clID__distr, clID__distr_relative_to_mean, clID__n_tumors_relative_to_mean_original, clID__n_tumors_relative_to_mean, clID__err, clIDs_sorted
 
 
 ### CHECK THIS THIS MIGHT NOT BE RIGHT
@@ -421,10 +458,10 @@ def bootstrap_tumor_size_percentiles(samples, path_to_data, percentiles, read_co
 
 
 # functions to make the many plots:
-def metric_bar_plot(clIDs_ordered, clID__y, clID__err, ytitle='metric', # metric (to be displayed on y-axis)
-                    clID__color=clID__color_in_vivo, clID__label=clID__label, # colors / labels
+def metric_bar_plot(clIDs_ordered, clID__y, clID__err, clID__color, ytitle='metric', # metric (to be displayed on y-axis)
+                    clID__label=clID__label, # labels
                     clID_replicates__linestyle=clID_replicates__linestyle, # how to highlight replicates
-                    ylims=[1e-2, 1e1], yticks=[1e-2, 1e-1, 1e0, 1e1], ylabels=['0.01', '0.1', '1', '10']):
+                    ylims=[1e-2, 1e1], yticks=[1e-2, 1e-1, 1e0, 1e1], ylabels=['0.01', '0.1', '1', '10'], ann=0.08):
     """
     Makes a bar plot with some kind of metric on a log-scale y-axis, and cell lines on the x-axis.
 
@@ -488,7 +525,7 @@ def metric_bar_plot(clIDs_ordered, clID__y, clID__err, ytitle='metric', # metric
 
     # connecting replicate cell lines by lines
     for key, value in clID_replicates__linestyle.items():
-        y = ylims[0] * 0.08
+        y = ylims[0] * ann
         x = sorted([clIDs_ordered.index(key[0]), clIDs_ordered.index(key[1])])
         ax.annotate('', xy=(x[0], y), xycoords='data', xytext=(x[1], y), textcoords='data',
                     arrowprops=dict(arrowstyle='-', linestyle=value, linewidth=0.5, color='0',
@@ -499,8 +536,9 @@ def metric_bar_plot(clIDs_ordered, clID__y, clID__err, ytitle='metric', # metric
 def comparison_scatter_plot(clIDs, # always exclude spike-in, sometimes Panc02 as well
                             clID__x, clID__xerr,
                             clID__y, clID__yerr,
+                            clID__color,
                             xtitle='metric', ytitle='metric', # metric (to be displayed on y-axis)
-                            clID__color=clID__color_in_vivo, clID__label=clID__label, # colors / labels
+                            clID__label=clID__label, # labels 
                             lims=[1e-3, 1e3], ticks=[1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3], labels=['0.001', '0.01', '0.1', '1', '10', '100', '1000']):
     """
     Makes a scatter plot comparing two experiments or conditions,
