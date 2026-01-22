@@ -292,7 +292,7 @@ def get_burden_and_n(merged_sample_ids,
     # by finding their fractions and multiplying by the total number of cells injected
     experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
-    clID__n_0 = {clID: np.mean([read_counts[sample_id][clID] / sum(read_counts[sample_id][1:]) * np.mean([metadata.loc[x]['initial number of cells'] for x in sample_id.split(':')]) for sample_id in pre_injection_samples.index.tolist()]) for clID in cell_line_ids_no_spikein} # excluding spike-in
+    clID__n_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) * np.mean([np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool * avg. number of cells injected via that injection type (should be the same across samples)
 
     # gather tumors for each sample + precompute mouse weights
     # just aggregarind all tumor sizes, without the size cutoff
@@ -363,7 +363,7 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
     experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
     # working w/ clID indices from now on
-    clID__n_0 = {clID__id[clID]: np.mean([read_counts[sample_id][clID] / sum(read_counts[sample_id][1:]) * np.mean([metadata.loc[x]['initial number of cells'] for x in sample_id.split(':')]) for sample_id in pre_injection_samples.index.tolist()]) for clID in cell_line_ids_no_spikein} # excluding spike-in
+    clID__n_0 = {clID__id[clID]: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) * np.mean([np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool * avg. number of cells injected via that injection type (should be the same across samples)
     n0_per_clID = np.array([clID__n_0[i] for i in range(n_clIDs)])  # shape (n_clIDs,)
 
     # gather tumors for each sample + precompute mouse weights
