@@ -34,8 +34,9 @@ matplotlib.rcParams['axes.facecolor'] = 'none'; matplotlib.rcParams['figure.face
 metadata = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/metadata.csv', index_col='sample id') # all sequencing samples
 read_counts_by_cell_line = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/cell-line_read_counts.csv', index_col='clID')
 cell_counts_by_cell_line = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/cell-line_cell_counts.csv', index_col='clID')
-path_to_reads = '/Users/alyulina/Research/metastatic-phenotypes/data/barcode_counts/'
-path_to_bootstraps = '/Users/alyulina/Research/metastatic-phenotypes/data/bootstraps/'
+path_to_reads = '/Users/alyulina/Research/metastatic-phenotypes/data/barcode_counts/' # clustered barcodes
+path_to_raw_reads = '/Users/alyulina/Research/metastatic-phenotypes/data/barcodes/' # extracted barcodes, not clustered
+path_to_bootstraps = '/Users/alyulina/Research/metastatic-phenotypes/data/bootstraps/' # see bootstrapping.ipynb
 
 # where to save plots
 path_to_save_figs = '/Users/alyulina/Research/metastatic-phenotypes/figures/'
@@ -134,7 +135,8 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                                          cell_line_ids=clIDs,
                                          path_to_data=path_to_reads,
                                          read_counts=read_counts_by_cell_line,
-                                         metadata=metadata):
+                                         metadata=metadata,
+                                         return_reads=False):
     """
     Converts barcode reads to estimated cell counts
     based on spiked in cell line read count.
@@ -146,11 +148,15 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
         path_to_data (str): Path to the folder containing files with read counts, optional (path_to_reads defined above by default).
         read_counts (pandas.DataFrame): A precomputed table with read counts, optional (read_counts_by_cell_line.csv by default).
         metadata (pandas.DataFrame): A table containing experimental details, including initial cell numbers, optional (metadata.csv by default).
+        return_reads (bool): Whether to also return raw read counts.
 
     Returns:
         tumor_sizes (pandas.DataFrame): A table with 'mouse', 'clID', 'barcode', 'size' (in cells) columns.
+        read_counts (pandas.DataFrame, optional): A table with raw reads, 'mouse', 'clID', 'barcode', 'reads' columns. 
+                                                If True, do not use these to obtain cell counts (you need to be careful with spike-ins).
     """
     sample__counts = {}
+    sample__reads = {}
 
     for sample in merged_sample_ids:
         # when we need to merge reads first before converting to counts
@@ -171,6 +177,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
             # checking if sample might need to be merged
             if len(sub_samples) == 1: # nothing to merge, will convert reads to counts using spike-in, add to out
                 sample__counts[sub_sample] = dict(zip(clIDs, [{} for i in clIDs]))
+                sample__reads[sub_sample]  = dict(zip(clIDs, [{} for i in clIDs]))  
 
                 with open(file_path, 'r') as f:
                     for line in f:
@@ -180,6 +187,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                             continue
                         cell_count = 50000 / (1 + read_counts.loc['GATC', sub_sample]) * read_count
                         sample__counts[sub_sample][clID][barcode] = cell_count # adding cell counts!
+                        sample__reads[sub_sample][clID][barcode] = read_count # and also saving read counts
 
             else:
                 spikein = metadata.loc[sub_sample, 'notes'].split()[-2]
@@ -187,6 +195,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
 
                     if sample not in sample__counts:
                         sample__counts[sample] = dict(zip(clIDs, [{} for i in clIDs]))
+                        sample__reads[sample]  = dict(zip(clIDs, [{} for i in clIDs])) 
 
                     with open(file_path, 'r') as f:
                         for line in f:
@@ -196,10 +205,11 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                                 continue
                             cell_count = 50000 / (1 + read_counts.loc['GATC', sub_sample]) * read_count
 
-                            if barcode in sample__counts[sample][clID]:
-                                sample__counts[sample][clID][barcode] += cell_count # adding cell counts!
-                            else:
-                                sample__counts[sample][clID][barcode] = cell_count
+                            sample__counts[sample][clID].setdefault(barcode, 0)  
+                            sample__reads[sample][clID].setdefault(barcode, 0)   
+                            
+                            sample__counts[sample][clID][barcode] += cell_count 
+                            sample__reads[sample][clID][barcode] += read_count  
 
                 elif spikein == 'one': # go in loop and merge reads first, then convert to counts
 
@@ -210,26 +220,38 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                         for line in f:
                             clID_barcode, read_count = line.strip().split('\t')
 
-                            if clID_barcode in clID_bc__n_reads:
-                                clID_bc__n_reads[clID_barcode] += int(read_count)
-                            else:
-                                clID_bc__n_reads[clID_barcode] = int(read_count)
+                            clID_bc__n_reads.setdefault(clID_barcode, 0) 
+                            clID_bc__n_reads[clID_barcode] += int(read_count) 
 
         if one:
             sample__counts[sample] = dict(zip(clIDs, [{} for i in clIDs]))
+            sample__reads[sample]  = dict(zip(clIDs, [{} for i in clIDs])) 
             for clID_bc, n_reads in clID_bc__n_reads.items():
                 clID, barcode = clID_bc.split('_')
                 if clID not in clIDs: # this should not happen if barcodes were processed correctly
                     continue
-                sample__counts[sample][clID][barcode] = 50000 / (1 + R) * n_reads # 50,000 cells were spiked-in
+                
+                cell_count = 50000 / (1 + R) * n_reads # 50,000 cells were spiked-in
+
+                sample__counts[sample][clID].setdefault(barcode, 0)
+                sample__reads[sample][clID].setdefault(barcode, 0)
+
+                sample__counts[sample][clID][barcode] += cell_count
+                sample__reads[sample][clID][barcode] += n_reads
 
     records = []
+    read_records = []
     for mouse, clID__counts in sample__counts.items():
         for clID, barcode__counts in clID__counts.items():
             for barcode, size in barcode__counts.items():
                 records.append((mouse, clID, barcode, size))
+                read_records.append((mouse, clID, barcode, sample__reads[mouse][clID][barcode])) 
 
     df = pd.DataFrame(records, columns=['mouse', 'clID', 'barcode', 'size'])
+
+    if return_reads: 
+        df_reads = pd.DataFrame(read_records, columns=['mouse', 'clID', 'barcode', 'reads'])  
+        return df.loc[df['clID'].isin(cell_line_ids)], df_reads.loc[df_reads['clID'].isin(cell_line_ids)] 
 
     return df.loc[df['clID'].isin(cell_line_ids)]
 
@@ -298,6 +320,7 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
                              B_tumors=100,
                              min_tumor_size=100,
                              weighted=True,
+                             percentiles = [50, 60, 70, 80, 90, 100],
                              path_to_data=path_to_reads,
                              read_counts=read_counts_by_cell_line,
                              cell_counts=cell_counts_by_cell_line,
@@ -314,6 +337,7 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
         min_tumor_size (int): Minimum tumor size, cells, optional (default=100).
         weighted (bool): Whether to weight bootstrap inerations by the total number tumors larger than 100 cells
                          when generating the bootstrap distribution, optional (default=True).
+        percentiles (list of int): Which tumor size percentiles above the cut-off to bootstrap. 
         path_to_data (str): Path to the folder containing files with read counts, optional (path_to_reads defined above by default).
         read_counts (pandas.DataFrame): A precomputed table with read counts, optional (read_counts_by_cell_line.csv by default).
         cell_counts (pandas.DataFrame): A precomputed table with cell counts, optional (cell_counts_by_cell_line.csv by default).
@@ -321,8 +345,8 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
 
     Returns:
         clID__relative_burden_bootstraps (dict): A dictionary containing B_mice x B_tumors bootstrap replicates of the relative tumor burden.
-        clID__n_tumors_bootstraps (dict): A dictionary containing B_mice x B_tumors bootstrap replicates of the number of tumors above the minimum size.
-        clID__sizes_bootstraps (dict): A dictionary containing B_mice x B_tumors bootstrap replicates of the tumor sizes above the minimum size.
+        clID__n_tumors_bootstraps (dict): A dictionary containing bootstrap distribution of the number of tumors above the minimum size.
+        clID__percentile_bootstraps (dict): A dictionary containing bootstrap distribution of the median tumor size (and other percentiles above the min_tumor_size cut-off).
     """
 
     # used to have / might be nice to have (but right now not necessary):
@@ -362,8 +386,8 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
 
     clID__relative_burden_bootstraps = {clID: [] for clID in cell_line_ids_no_spikein}
     clID__n_tumors_bootstraps = {clID: [] for clID in cell_line_ids_no_spikein}
-    clID__sizes_bootstraps = {clID: [] for clID in cell_line_ids_no_spikein}
-    clID__sizes_stats_bootstraps = {clID: [] for clID in cell_line_ids_no_spikein}
+    clID__percentiles_bootstraps = {clID: {p: [] for p in percentiles} for clID in cell_line_ids_no_spikein}
+
     for _ in range(B_mice):
         sampled_mice = np.random.choice(merged_sample_ids, size=n_mice, replace=True, p=weights)
 
@@ -380,7 +404,6 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
         resampled_sizes_with_clID = sampled_sizes_with_clID[resampled_indices]
         clIDs_resampled = resampled_sizes_with_clID[:, :, 0].astype(int)  # clID indices: shape (B_tumors, n_tumors)
         sizes_resampled = resampled_sizes_with_clID[:, :, 1].astype(float)  # tumor sizes: shape (B_tumors, n_tumors)
-
         
         # collect tumor sizes above threshold per clID per bootstrap
         for b in range(B_tumors):
@@ -388,8 +411,17 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
             sizes_b = sizes_resampled[b]
             for i, clID in id__clID.items():
                 mask = (clIDs_b == i) & (sizes_b >= min_tumor_size)
-                clID__sizes_bootstraps[clID] += list(sizes_b[mask])
-        
+                sizes_clID_b = sizes_b[mask] 
+
+                # percentiles
+                if len(sizes_clID_b) > 0:
+                    qs = np.percentile(sizes_clID_b, percentiles)
+                    for p, q in zip(percentiles, qs):
+                        clID__percentiles_bootstraps[clID][p].append(q)
+                else:
+                    for p in percentiles:
+                        clID__percentiles_bootstraps[clID][p].append(np.nan)
+
         # we want to compute two things for each of the B_tumors samples:
         # sum of tumor sizes per clID and count of tumors ≥ minimum size per clID
         # we'll be clever and count bins!
@@ -403,18 +435,7 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
             clID__relative_burden_bootstraps[clID] += list(relative_burdens[:, i])
             clID__n_tumors_bootstraps[clID] += list(count_per_clID[:, i])
 
-    for clID in cell_line_ids_no_spikein:
-        sizes = clID__sizes_bootstraps[clID]
-        if sizes:
-            clID__sizes_stats_bootstraps[clID] = {
-                2.5: np.quantile(sizes, 0.025),
-                50: np.median(sizes),
-                97.5: np.quantile(sizes, 0.975)
-            }
-        else:
-            clID__sizes_stats_bootstraps[clID] = {2.5: np.nan, 50: np.nan, 97.5: np.nan}
-
-    return clID__relative_burden_bootstraps, clID__n_tumors_bootstraps, clID__sizes_stats_bootstraps
+    return clID__relative_burden_bootstraps, clID__n_tumors_bootstraps, clID__percentiles_bootstraps
 
 
 # getting the bootstrap distribution of y/x statistics
