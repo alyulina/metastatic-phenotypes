@@ -15,6 +15,6 @@ These files are sufficient to generate most figures in the manuscript, except fo
 
 - **The number of reads associated with each cell line** in each sample, obtained by summing over clonal barcodes (`cell-line_read_counts.csv`).
 
-- **Estimated cell counts for each cell line** (`cell-line_cell_counts.csv`). Barcode read counts were converted to cell numbers by normalizing to a barcoded spike-in cell line added at a known abundance during library preparation (50,000 cells per sample). Information from `metadata.csv` is additionally required to correctly merge reads for replicate samples. For details, see `utils.convert_barcode_reads_to_cell_counts()` in `../figures/utils.py`.
+- **Estimated cell counts for each cell line** (`cell-line_cell_counts.csv`). Read counts were converted to cell numbers by normalizing to a barcoded spike-in cell line added at a known abundance during library preparation (50,000 cells per sample). Information from `metadata.csv` is additionally required to correctly merge reads for replicate samples. For details, see `utils.convert_barcode_reads_to_cell_counts()` in `../figures/utils.py`.
 
 _Raw data will be made available upon manuscript submission. Accession numbers and repository details will be provided in the manuscript._
