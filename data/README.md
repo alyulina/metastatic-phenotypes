@@ -7,7 +7,7 @@
    	- `tissue`, tissue collected (left blank for _in vitro_ samples);  
    	- `genotype`, mouse genotype (left blank for _in vitro_ samples);  
    	- `eartag (in vivo) / passage (in vitro)`, mouse eartag or passage replicate;
-   	- `initial number of cells`, number of cells injected (_in vivo_) or transferred (_in vitro_);
+   	- `initial number of cells`, number of cells injected (_in vivo_) or transferred (_in vitro_); note that for day 0 samples, the initial cell number is _not_ the number of cells subsequently injected!
    	- `lung weight, g (in vivo) / cells (in vitro)`, measured lung weight in grams (_in vivo_) or estimated number of cell at the end of a passage (_in vitro_);  
    	- `spike-in added`, indicates whether a spike-in cell line was added during library preparation (see manuscript for details);
    	- `notes`, mostly used to indicate the replicate structure between samples (e.g. same library but different sequencing runs or same tissue but different libraries) and will include the colon-separated merged sample name that should be used for downstream processing.  
