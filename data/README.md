@@ -11,7 +11,7 @@
 
 - **Clonal barcode counts** for all samples (`bc-counts/sample_clIDs_rBC_cluster_counts.txt`). All upstream data processing – from raw sequencing reads to clustered clonal barcode counts – is contained in `../read-processing`.  
 
-These files are sufficient to generate most figures in the manuscript, except for three supplementary panels associated with Figure 3 that compare clustered and unclustered reads, which additionally require the raw data. All downstream analyses and figure generation are contained in the `../figures` folder. Commonly used files include
+These files are sufficient to generate most figures in the manuscript, except for three supplementary panels associated with Figure 3 that compare clustered and unclustered reads, which additionally require the raw data. All downstream analyses and figure generation are contained in the `../figures` folder. Commonly used downstream are  
 
 - **The number of reads associated with each cell line** in each sample, obtained by summing over clonal barcodes (`cell-line_read_counts.csv`).
 
