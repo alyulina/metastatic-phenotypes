@@ -1,7 +1,8 @@
+## Figures 2-4
 
-#### Figures
+The code above generates panels for Figures 2–4 in the main text, as well as the associated supplementary figures (see `fig2`, `fig3`, `fig4`). These figures were subsequently assembled and annotated in Adobe Illustrator; stylistic elements (e.g., font, line width, annotations) were adjusted for clarity and consistency, but the underlying data and graphical content were not altered. The file `utils.py` contains helper functions used for both data analysis and plotting. Python library dependencies are listed in `requirements.txt`.  
 
-The code above (`fig2/fig2.ipynb`, `fig3/fig3.ipynb`, `fig4/fig4.ipynb`) generates panels for Figures 2–4 in the main text, as well as the associated supplementary figures (`fig2/figs`, `fig3/figs`, `fig4/figs`). These figures were subsequently assembled and annotated in Adobe Illustrator; stylistic elements (e.g., font, line width, annotations) were adjusted for clarity and consistency, but the underlying data and graphical content were not altered. The file `utils.py` contains helper functions used for both data analysis and plotting. Python library dependencies are listed in `requirements.txt`.  
+
 
 #### Bootstrap resampling for confidence intervals
 
