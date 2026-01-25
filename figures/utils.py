@@ -292,7 +292,15 @@ def get_burden_and_n(merged_sample_ids,
     # by finding their fractions and multiplying by the total number of cells injected
     experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
-    clID__n_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) * np.mean([np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool * avg. number of cells injected via that injection type (should be the same across samples)
+
+    clID__frac_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool
+    mouse__n_0 = {s: np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids} # number of cells injected per mouse in total (averaging over replicates but it should be the same number since they came from the same mouse)
+    mouse__clID__n0 = {s: {clID: clID__frac_0[clID] * mouse__n_0[s] for clID in cell_line_ids_no_spikein} for s in merged_sample_ids} # number of cells injected per mouse, per cell line
+    
+    #clID__n_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) * np.mean([np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool * avg. number of cells injected via that injection type (should be the same across samples)
+    # sic! note that currently it is not normalizing by initial number of cells injected in cases where numbers differ across a cohort;
+    # in practice, this is only the case for 2d lung samples in exp. 2 – SO BE EXTRA CAREFUL w/ those samples if you are looking at them 
+    # (we ended up not making any final figures so I never fixed this)
 
     # gather tumors for each sample + precompute mouse weights
     # just aggregarind all tumor sizes, without the size cutoff
@@ -304,7 +312,8 @@ def get_burden_and_n(merged_sample_ids,
 
         clID_tumors = tumor_sizes[tumor_sizes['clID'] == clID] # filter tumors of this cell line
         clID__n_tumors[clID] = clID_tumors[clID_tumors['size'] >= min_tumor_size].shape[0]
-        clID__burden[clID] = clID_tumors['size'].sum() / (clID__n_0.get(clID, 1) * n_mice)
+        # clID__burden[clID] = clID_tumors['size'].sum() / (clID__n_0.get(clID, 1) * n_mice)
+        clID__burden[clID] = clID_tumors['size'].sum() / sum(mouse__clID__n0[s][clID] for s in merged_sample_ids)
 
     average_burden = np.mean(list(clID__burden.values()))
     clID__relative_burden = {clID: clID__burden[clID] / average_burden for clID in clID__burden.keys()}
@@ -314,6 +323,10 @@ def get_burden_and_n(merged_sample_ids,
 
 # let's define one bootstrap function for everything! will bootstrap mice, tumors, weight samples by number of tumors above a certain size
 # return: bootstrap distributions for per-cell-line normalized burden relative to average across all cell lines and number of tumors
+
+# sic! note that currently it is not normalizing by initial number of cells injected in cases where numbers differ across a cohort;
+# in practice, this is only the case for 2d lung samples in exp. 2 – SO BE EXTRA CAREFUL w/ those samples if you are looking at them 
+# (we ended up not making any final figures so I never fixed this)
 def bootstrap_burden_n_sizes(merged_sample_ids,
                              cell_line_ids=clIDs,
                              B_mice=100,
@@ -362,9 +375,13 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
     # by finding their fractions and multiplying by the total number of cells injected
     experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
+
+    clID__frac_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool
+    mouse__n_0 = {s: np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids} # number of cells injected per mouse in total (averaging over replicates but it should be the same number since they came from the same mouse)
+    mouse__clID__n_0 = {s: {clID: clID__frac_0[clID] * mouse__n_0[s] for clID in cell_line_ids_no_spikein} for s in merged_sample_ids} # number of cells injected per mouse, per cell line
+    
     # working w/ clID indices from now on
-    clID__n_0 = {clID__id[clID]: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) * np.mean([np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool * avg. number of cells injected via that injection type (should be the same across samples)
-    n0_per_clID = np.array([clID__n_0[i] for i in range(n_clIDs)])  # shape (n_clIDs,)
+    #n0_per_clID = np.array([clID__n_0[i] for i in range(n_clIDs)])  # shape (n_clIDs,) – this needs to be bootstrapped now that we are not assuming equal numbers 
 
     # gather tumors for each sample + precompute mouse weights
     # just aggregarind all tumor sizes, without the size cutoff
@@ -390,6 +407,12 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
 
     for _ in range(B_mice):
         sampled_mice = np.random.choice(merged_sample_ids, size=n_mice, replace=True, p=weights)
+
+        # how many cells injected per cohort
+        total_n0_per_clID = np.zeros(n_clIDs) 
+        for s in sampled_mice: 
+            for i in range(n_clIDs):
+                total_n0_per_clID[i] += mouse__clID__n_0[s].get(cell_line_ids_no_spikein[i], 0)
 
         # now, want to get all tumors from the sampled mice & keep the clID info
         # initialize an empty list to collect the tumor sizes along with their clID information for the sampled mice
@@ -428,7 +451,8 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
         sum_per_clID = np.array([np.bincount(clIDs_resampled[b], weights=sizes_resampled[b], minlength=n_clIDs) for b in range(B_tumors)])
         count_per_clID = np.array([np.bincount(clIDs_resampled[b][sizes_resampled[b] >= min_tumor_size], minlength=n_clIDs) for b in range(B_tumors)])
 
-        burdens = sum_per_clID / (n0_per_clID[None, :] * n_mice) # adding an extra dimension to an array for broadcasting
+        #burdens = sum_per_clID / (n0_per_clID[None, :] * n_mice) # adding an extra dimension to an array for broadcasting – replacing w/ bootstrapped value
+        burdens = sum_per_clID / total_n0_per_clID[None, :]
         relative_burdens = burdens / burdens.mean(axis=1, keepdims=True)
 
         for i, clID in id__clID.items():
