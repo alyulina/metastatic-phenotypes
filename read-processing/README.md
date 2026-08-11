@@ -20,8 +20,12 @@ The script will first unzip the `.fq.gz` files, merge reads that came from from 
 `./out/sample_clID_rBC_extracted.txt`, a file with clonal barcodes for each clID. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
+Sequencing and PCR errors can introduce small changes in barcode sequences, causing reads originating from the same clone to appear as distinct barcodes. We therefore group highly similar barcode sequences that differ substantially in abundance, since a low-abundance barcode that closely resembles a much more abundant barcode is likely to represent a spurious clone.
+
 The code in `cluster_barcodes.py` performs clusters extracted clonal barcodes within each cell line by running `bartender` with the following parameters: `-c 1 -s 1 -l 5 -z -1 -d 2`. Again, this can be done by executing
 ```
 sbatch 2_cluster_barcodes.sh
 ```
-This should produce the followint output: `sample_clID_rBC_cluster_counts.txt`, a file that contains how many times each barcode cluster was seen. You can find these counts in `../data/bc-counts` for all samples listed in `../data/metadata.csv`.
+This should produce the following output: `sample_clID_rBC_cluster_counts.txt`, a file that contains how many times each barcode cluster was seen. You can find these counts in `../data/bc-counts` for all samples listed in `../data/metadata.csv`.
+
+#### 3. _IN PROGRESS_ Removing contaminating barcodes
