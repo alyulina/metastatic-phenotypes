@@ -47,7 +47,7 @@ reads_r1 = open(sample_path + sample + '_R1.fq', 'r')
 reads_r2 = open(sample_path + sample + '_R2.fq', 'r')
 
 # output files
-clID_bc_out = open(sample_path + sample + '_clID_rBC_extracted.txt', 'w+')
+clID_bc_out = open(sample_path + sample + '_clIDs_rBC_extracted.txt', 'w+')
 failed_clIDs_out = open(sample_path + sample + '_failed_clIDs.txt', 'w+')
 
 # dict. w/ clIDs as keys and bartender input as values
@@ -113,7 +113,7 @@ while True:
                     o += 1
                     
                     # .fastq entry number, cell line ID, barcode
-                    failed_clIDs_out.write('\t'.join([str(i // 4 + 1), clID, bc]) + '\n')
+                    failed_clIDs_out.write('\t'.join([str(i + 1), clID, bc]) + '\n')
             
             else:
                 m += 1
@@ -144,7 +144,7 @@ while True:
 
                 else:
                     o += 1
-                    failed_clIDs_out.write('\t'.join([str(i // 4 + 1), clID, bc]) + '\n')
+                    failed_clIDs_out.write('\t'.join([str(i + 1), clID, bc]) + '\n')
                                 
             else:
                 m += 1
@@ -159,8 +159,8 @@ failed_clIDs_out.close()
 # writing stats out
 stats_out = open(sample_path + sample + '_find_barcodes_stats.txt', 'w+')
 stats_out.write('Total reads: ' + str(i) + '\n')
-stats_out.write('Had a regex match and a high q-score but did not pair well: ' + str(o) + '\n')
-stats_out.write('Passed qc but no clID match: ' + str(m) + '\n')
+stats_out.write('Had a regex match and a high q-score but did not pair well: ' + str(m) + '\n')
+stats_out.write('Passed qc but no clID match: ' + str(o) + '\n')
 stats_out.write('Passed qc and had a known clID: ' + str(n) + '\n')
 stats_out.close()
 

@@ -31,17 +31,21 @@ sample_id=$(head -$SLURM_ARRAY_TASK_ID samples.txt | tail -1)
 # go to where the data is
 cd "${data}"/"$sample_id"/
 
-# note that this only works for some names but not all
-ls *_1.fq.gz | cut -d _ -f 1-3 | uniq \
-    | while read id; do \
-        cat $id*_*_1.fq.gz > ${id%_*}_R1.fq.gz; \
-        cat $id*_*_2.fq.gz > ${id%_*}_R2.fq.gz; \
-    done
-    
-# unzip all .fq.gz files
-for i in *.fq.gz; do
-    gzip -cd "$i" > "${i%.gz}"
+# merge lanes: works for any file naming, as long as mates end in _1.fq.gz / _2.fq.gz
+shopt -s nullglob
+r1_files=( *_1.fq.gz )
+if [ ${#r1_files[@]} -eq 0 ]; then
+    echo "No *_1.fq.gz files in $PWD" >&2; exit 1
+fi
+r2_files=()
+for f in "${r1_files[@]}"; do
+    r2="${f%_1.fq.gz}_2.fq.gz"
+    [ -f "$r2" ] || { echo "Missing mate file: $r2" >&2; exit 1; }
+    r2_files+=( "$r2" )
 done
+# decompress and concatenate lanes in matching order
+gzip -cd "${r1_files[@]}" > "${sample_id}_R1.fq"
+gzip -cd "${r2_files[@]}" > "${sample_id}_R2.fq"
 
 # clean up: remove original unmerged .fq files
 # rm *_L*_*.fq

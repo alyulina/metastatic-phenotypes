@@ -40,7 +40,7 @@ for i in clIDs:
     if not os.path.exists(barcodes_path):
         continue
 
-    # else run bartender with the command line, no cutoff to not mess up with the line number -c 1, disable statistical test  -z -1, set up Hamming distance at 2 -d 2, seed length 8 -l, 8 threads
+    # else run bartender with the command line, no cutoff to not mess up with the line number -c 1, seed length 5 -l 5, disable statistical test -z -1, set up Hamming distance at 2 -d 2; no thread count set, so bartender's default is used
     os.system(f'{bartender_path}bartender_single_com -f {barcodes_path} -o {out_prefix} -c 1 -s 1 -l 5 -z -1 -d 2')
 
     cluster_id_cluster_seq_i = {} # a dictionary w/ cluster IDs as keys as cluster centers as values
