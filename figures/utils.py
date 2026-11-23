@@ -30,25 +30,34 @@ matplotlib.rcParams['pdf.fonttype'] = 42; matplotlib.rcParams['ps.fonttype'] = 4
 matplotlib.rcParams['axes.facecolor'] = 'none'; matplotlib.rcParams['figure.facecolor'] = 'none' # removing figure background color
 
 # where to find sample information & sequencing data
-# excluded samples: SK1_8 (very low coverage), SK1_11 (duplicate of SK1_10), LS01_17 (no spike-in detected), LS01_32 (no reads)
-metadata = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/metadata.csv', index_col='sample id') # all sequencing samples
-read_counts_by_cell_line = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/cell-line_read_counts.csv', index_col='clID')
-cell_counts_by_cell_line = pd.read_csv('/Users/alyulina/Research/metastatic-phenotypes/data/cell-line_cell_counts.csv', index_col='clID')
-path_to_reads = '/Users/alyulina/Research/metastatic-phenotypes/data/barcode_counts/' # clustered barcodes
-path_to_raw_reads = '/Users/alyulina/Research/metastatic-phenotypes/data/barcodes/' # extracted barcodes, not clustered
-path_to_bootstraps = '/Users/alyulina/Research/metastatic-phenotypes/data/bootstraps/' # see bootstrapping.ipynb
+# excluded samples: SK1_8 (very low coverage), SK1_11 (duplicate of SK1_10), LS01_17 and LS01_23 (no spike-in detected), LS01_32 (no reads)
+path_to_figures = os.path.dirname(os.path.abspath(__file__)) + '/' # the folder with this file, so that paths work from any notebook folder
+path_to_data = path_to_figures + '../data/'
+metadata = pd.read_csv(path_to_data + 'metadata.csv', index_col='sample id') # all sequencing samples
+read_counts_by_cell_line = pd.read_csv(path_to_data + 'cell-line_read_counts.csv', index_col='clID')
+cell_counts_by_cell_line = pd.read_csv(path_to_data + 'cell-line_cell_counts.csv', index_col='clID')
+path_to_reads = path_to_data + 'bc-counts-cleaned/' # clustered barcodes, contaminating barcodes removed
+path_to_raw_reads = path_to_data + 'raw-reads/' # extracted barcodes, not clustered (needed for two fig3 SI panels only)
+path_to_bootstraps = path_to_data + 'bootstraps/' # see bootstrapping.ipynb
 
 # where to save plots
-path_to_save_figs = '/Users/alyulina/Research/metastatic-phenotypes/figures/'
+path_to_save_figs = path_to_figures
 
 # cell line IDs & corresponding cell line labels, spike-in must be first
 # excluded: other spike-ins & mt4-2D, which had the same clIDs
+# (so mt4-2D is not in the pre-injection fractions: cells injected per line, and success, are slightly overstated, by the same factor for every line; relative burden is not affected)
 clIDs = ['GATC', 'AAGG', 'ACAC', 'ACCT', 'ACGA', 'ACTG', 'AGAG', 'AGCA', 'AGGT', 'AGTC', 'ATCG', 'ATGC', 'CAAC', 'CACT', 'CAGA', 'CATG', 'CCAA', 'CCTT', 'CGAT', 'CGTA', 'CTGT', 'CTTC', 'GAAG', 'GCAT', 'GCTA', 'GGAA', 'GGTT', 'GTAC', 'GTGA', 'GTTG', 'TCCA', 'TGAC', 'TTCC', 'TTGG']
 cell_line_labels = ['Spike-in 1', '7160c2', 'FC1199', '6694c2', '7160c5', 'BF857', 'BF1987', 'Panc02', '0688M', 'FC1245', 'BF4326', 'BF2117', '6419c5', 'BF4326Rep', 'KPC960', '0755P', 'BF1836', 'BF2014', 'BF5960', '6499c4', '6422c5', 'FC1245Rep', 'KPC-JH', 'KPC960Rep', 'BF2153', 'KC6141', 'mT3-2D', 'mT5-2D', '0764P', '6421c2', '0755A', '2838c3', 'FC1242', 'KPC961']
 clID__label = dict(zip(clIDs, cell_line_labels))
 clIDs_no_spikein = clIDs[1:]
 clIDs_not_rejected = [x for x in clIDs_no_spikein if clID__label[x] not in ['KPC960', 'KPC960Rep', 'KPC961']] # and no spike-in
 clIDs_rep = [['AAGG', 'ACGA'], ['AGTC', 'CTTC'], ['ATCG', 'CACT'], ['CAGA', 'GCAT']]
+
+# spike-in (GATC) cells per sample: the exp. 1 stock also carried cells of other lines (0.69x the GATC reads), counted in the 50,000
+exp__spike_cells = {'1': 50000 / (1 + 0.69), '2': 50000}
+# cell lines left out of one experiment: 7160c2 contaminated exp. 1 libraries (removed from exp. 1 in vivo samples, see read-processing)
+# (it was injected, so it stays in the pre-injection fractions; it is only left out of burden, number and sizes)
+exp__excluded_clIDs = {'1': ['AAGG']}
 
 # colors
 cmap = matplotlib.colors.LinearSegmentedColormap.from_list('custom_cmap', ['#c13e2e', '#e86b5a', '#f9a28d', '#e9e0c8', '#a3c3c3', '#5e9faf', '#00768d'][::-1])
@@ -165,7 +174,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
         sub_samples = sample.split(':')
 
         for sub_sample in sub_samples:
-            file_path = os.path.join(path_to_data, f'{sub_sample}_clIDs_rBC_cluster_counts.txt')
+            file_path = os.path.join(path_to_data, f'{sub_sample}_clIDs_rBC_cluster_counts_cleaned.txt')
             if not os.path.exists(file_path):
                 print(f'File {file_path} not found.')
                 continue
@@ -185,7 +194,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                         clID, barcode = clID_barcode.split('_'); read_count = int(read_count)
                         if clID not in clIDs: # this should not happen if barcodes were processed correctly
                             continue
-                        cell_count = 50000 / (1 + read_counts.loc['GATC', sub_sample]) * read_count
+                        cell_count = exp__spike_cells[metadata.loc[sub_sample, 'experiment']] / (1 + read_counts.loc['GATC', sub_sample]) * read_count
                         sample__counts[sub_sample][clID][barcode] = cell_count # adding cell counts!
                         sample__reads[sub_sample][clID][barcode] = read_count # and also saving read counts
 
@@ -203,7 +212,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                             clID, barcode = clID_barcode.split('_'); read_count = int(read_count)
                             if clID not in clIDs:
                                 continue
-                            cell_count = 50000 / (1 + read_counts.loc['GATC', sub_sample]) * read_count
+                            cell_count = exp__spike_cells[metadata.loc[sub_sample, 'experiment']] / (1 + read_counts.loc['GATC', sub_sample]) * read_count
 
                             sample__counts[sample][clID].setdefault(barcode, 0)  
                             sample__reads[sample][clID].setdefault(barcode, 0)   
@@ -231,7 +240,7 @@ def convert_barcode_reads_to_cell_counts(merged_sample_ids,
                 if clID not in clIDs: # this should not happen if barcodes were processed correctly
                     continue
                 
-                cell_count = 50000 / (1 + R) * n_reads # 50,000 cells were spiked-in
+                cell_count = exp__spike_cells[metadata.loc[sample.split(':')[0], 'experiment']] / (1 + R) * n_reads # spike-in cells
 
                 sample__counts[sample][clID].setdefault(barcode, 0)
                 sample__reads[sample][clID].setdefault(barcode, 0)
@@ -292,6 +301,7 @@ def get_burden_and_n(merged_sample_ids,
     # by finding their fractions and multiplying by the total number of cells injected
     experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
+    cell_line_ids_no_spikein = [clID for clID in cell_line_ids_no_spikein if clID not in exp__excluded_clIDs.get(experiment, [])] # e.g. 7160c2 in exp. 1
 
     clID__frac_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool
     mouse__n_0 = {s: np.mean([metadata.loc[x]['initial number of cells'] for x in s.split(':')]) for s in merged_sample_ids} # number of cells injected per mouse in total (averaging over replicates but it should be the same number since they came from the same mouse)
@@ -367,13 +377,14 @@ def bootstrap_burden_n_sizes(merged_sample_ids,
     
     # just making sure that the spike-in is not there
     cell_line_ids_no_spikein = [clID for clID in cell_line_ids if clID != 'GATC']
+    experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
+    cell_line_ids_no_spikein = [clID for clID in cell_line_ids_no_spikein if clID not in exp__excluded_clIDs.get(experiment, [])] # e.g. 7160c2 in exp. 1
     clID__id = {clID: i for i, clID in enumerate(cell_line_ids_no_spikein)} # let's map clIDs to indices
     id__clID = {i: clID for i, clID in enumerate(cell_line_ids_no_spikein)} # and back
     n_clIDs = len(cell_line_ids_no_spikein)
 
     # precompute pre-injection cell counts for each clID first,
     # by finding their fractions and multiplying by the total number of cells injected
-    experiment = metadata.loc[[s.split(':')[0] if ':' in s else s for s in merged_sample_ids], 'experiment'].iloc[0]
     pre_injection_samples = metadata[(metadata['time point, d'] == 0) & (metadata['experiment'] == experiment)]
 
     clID__frac_0 = {clID: np.mean([read_counts[s][clID] / sum(read_counts[s][1:]) for s in pre_injection_samples.index]) for clID in cell_line_ids_no_spikein} # avg. frac. in pre-inj. pool
@@ -510,7 +521,7 @@ def correlation_plot(cell_line_ids,
         ax (matplotlib.axes): A plot!
     """
 
-    cell_line_ids_no_spikein = [clID for clID in cell_line_ids if clID != 'GATC']
+    cell_line_ids_no_spikein = [clID for clID in cell_line_ids if clID != 'GATC' and clID in clID__x and clID in clID__y] # lines present on both axes (e.g. no 7160c2 in exp. 1)
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
