@@ -7,8 +7,6 @@
 #SBATCH --mem=8G
 #SBATCH --array=1-191
 #SBATCH --no-requeue
-#SBATCH --mail-user=alyulina@stanford.edu
-#SBATCH --mail-type=ALL
 #SBATCH --export=NONE
 
 unset SLURM_EXPORT_ENV
