@@ -1,6 +1,6 @@
 ## Extracting clonal and cell line barcodes
 
-Processing has three steps: extracting barcodes from raw reads, clustering them within each cell line, and removing contaminating barcodes. Example inputs and outputs are provided here (`samples.txt`, `raw-reads/`, `out/`); the full raw reads are too large for this repository and can be accessed as described in the manuscript. The outputs of step 2 (`../data/bc-counts-clustered/`) and step 3 (`../data/bc-counts-cleaned/`, the removed barcodes, and the per-cell-line tables) are in `../data/` for all samples in `../data/metadata.csv`.
+Processing has three steps: extracting barcodes from raw reads, clustering them within each cell line, and removing contaminating barcodes. Example inputs and outputs are provided here (`samples.txt`, `raw-reads`, `out`); the full raw reads are too large for this repository and can be accessed as described in the manuscript. The outputs of step 2 (`../data/bc-counts-clustered`) and step 3 (`../data/bc-counts-cleaned`, the removed barcodes, and the per-cell-line tables) are in `../data` for all samples in `../data/metadata.csv`.
 
 **Requirements:** `python 3.6.1` or above (tested with `python 3.12.16`), `numpy 1.18.1` or above (tested with `numpy 2.5.5`), `re 2.2.1` or above, `pandas 3.1.1` or above, `scipy 1.18.1` or above, `matplotlib 3.11.2` or above, `bartender` (Zhao *et al.*, 2017).
 
@@ -17,7 +17,7 @@ Running this code requires a list of demultiplexed samples (see `samples.txt` fo
 ```
 sbatch 1_find_barcodes.sh
 ```
-The script will first unzip the `.fq.gz` files, merge reads that came from different lanes, rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`, and finally, run `find_barcodes.py`. For each sample, it writes to `out/` the extracted clIDs and clonal barcodes (one file with all reads, and one file per clID, used in step 2), the reads with an unknown clID, and the number of reads filtered out at each step. 
+The script will first unzip the `.fq.gz` files, merge reads that came from different lanes, rename the two resulting files to `sample_R1.fq` and `sample_R2.fq`, and finally, run `find_barcodes.py`. For each sample, it writes to `out` the extracted clIDs and clonal barcodes (one file with all reads, and one file per clID, used in step 2), the reads with an unknown clID, and the number of reads filtered out at each step. 
     
 #### 2. Clustering and counting clonal barcodes within each cell line
 Sequencing and PCR errors can introduce small changes in barcode sequences, causing reads originating from the same clone to appear as distinct barcodes. We therefore group highly similar barcode sequences that differ substantially in abundance, since a low-abundance barcode that closely resembles a much more abundant barcode is likely to represent a spurious clone.
@@ -48,6 +48,6 @@ The tests above also identify cell line 7160c2 as a likely contaminant in experi
 
 Pairs in which the source is from experiment 2 and the recipient from experiment 1 are tested as a negative control (experiment 2 was processed later); none passes. The thresholds were chosen so that the results agree with pairwise frequency plots inspected by eye, and each was varied in a sensitivity analysis.
 
-The spike-in's own barcodes are never removed; _in vitro_ and pre-injection samples are unchanged. The cleaned counts (`sample_clIDs_rBC_cluster_counts_cleaned.txt`) can be found in [`../data/bc-counts-cleaned/`](../data/bc-counts-cleaned/) for all samples listed in [`../data/metadata.csv`](../data/metadata.csv); they are used for all figures. The flagged pairs, with the rule(s) that flagged each and, for co-travelling barcodes, the source sample(s), are in `../data/flagged_barcodes.tsv`.
+The spike-in's own barcodes are never removed; _in vitro_ and pre-injection samples are unchanged. The cleaned counts (`sample_clIDs_rBC_cluster_counts_cleaned.txt`) can be found in `../data/bc-counts-cleaned` for all samples listed in `../data/metadata.csv`; they are used for all figures. The flagged pairs, with the rule(s) that flagged each and, for co-travelling barcodes, the source sample(s), are in `../data/flagged_barcodes.tsv`.
 
-The notebook also builds `../data/cell-line_read_counts.csv` and `../data/cell-line_cell_counts.csv` from the cleaned counts. Figures are saved in `figs/`.
+The notebook also builds `../data/cell-line_read_counts.csv` and `../data/cell-line_cell_counts.csv` from the cleaned counts. Figures are saved in `figs`.
