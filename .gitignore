@@ -1,3 +1,5 @@
 .DS_Store
 .ipynb_checkpoints/
 data/bootstraps/
+data/bootstraps-weighted/
+figures/bootstrapping_weighted.ipynb
